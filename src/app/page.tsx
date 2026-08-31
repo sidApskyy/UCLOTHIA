@@ -287,49 +287,47 @@ export default function Home() {
           sizes="100vw"
           className="object-cover object-[center_30%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent" />
 
         <div className="absolute inset-0 flex items-end">
           <div className="w-full pb-16 md:pb-24 lg:pb-32">
             <div className="container-luxury">
-              <div className="max-w-2xl">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="h-px w-10 bg-white/50" />
-                  <p className="text-[0.75rem] uppercase tracking-[0.25em] font-medium text-white/70">
-                    Weddings
-                  </p>
-                </div>
-                <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.05] tracking-[-0.02em] mb-10">
-                  The Wedding Atelier
-                </h2>
+              <Reveal
+                variant="fade-up"
+                delay={200}
+                className="max-w-2xl"
+              >
+                <div className="bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-10 lg:p-12 shadow-2xl shadow-black/20">
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="h-px w-8 bg-[var(--color-accent)]" />
+                    <p className="text-[0.75rem] uppercase tracking-[0.25em] font-medium text-white/70">
+                      Weddings
+                    </p>
+                  </div>
+                  <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.05] tracking-[-0.02em] mb-8">
+                    The Wedding Atelier
+                  </h2>
 
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 sm:divide-x sm:divide-white/15 mb-12">
-                  {[
-                    { label: "Bridal", href: "/weddings" },
-                    { label: "Groom", href: "/weddings" },
-                    { label: "Occasion", href: "/weddings" },
-                  ].map((category) => (
-                    <Link
-                      key={category.label}
-                      href={category.href}
-                      className="group inline-flex items-center gap-3 text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-white/70 hover:text-white transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] sm:px-8 first:sm:pl-0"
-                    >
-                      <span className="h-px w-6 bg-white/30 transition-all duration-[var(--duration-medium)] group-hover:w-10 group-hover:bg-white/70" />
-                      {category.label}
-                    </Link>
-                  ))}
+                  <SpecularButton
+                    href="/weddings"
+                    size="lg"
+                    baseColor="#ffffff"
+                    lineColor="#d4af37"
+                    textColor="#1a1a1a"
+                    tint="#ffffff"
+                    tintOpacity={0.3}
+                    blur={6}
+                    intensity={1.2}
+                    shineSize={12}
+                    proximity={180}
+                    followMouse
+                    className="tracking-[0.2em] uppercase"
+                  >
+                    Discover Weddings
+                  </SpecularButton>
                 </div>
-
-                <Link
-                  href="/weddings"
-                  className="inline-flex items-center gap-3 text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-white hover:text-white transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] group"
-                >
-                  <span className="h-px w-8 bg-white/50 transition-all duration-[var(--duration-medium)] group-hover:w-12 group-hover:bg-white" />
-                  Discover Weddings
-                  <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1">→</span>
-                </Link>
-              </div>
+              </Reveal>
             </div>
           </div>
         </div>
