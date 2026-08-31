@@ -13,9 +13,9 @@ const AUTO_ADVANCE_MS = 1200; // ms between card changes
 const DRAG_THRESHOLD = 12;
 const MOMENTUM_DECAY = 0.92;
 const RESUME_DELAY = 5000;
-const MAX_VISUAL_DISTANCE = 2.8;
-const MIN_SCALE = 0.82;
-const MIN_OPACITY = 0.35;
+const MAX_VISUAL_DISTANCE = 2.5;
+const MIN_SCALE = 0.72;
+const MIN_OPACITY = 0.25;
 
 export function LookbookScroll({ looks }: LookbookScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -237,15 +237,17 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
     scrollToRealCard(next, true);
   }, [activeIndex, looks.length, pauseAuto, scrollToRealCard]);
 
-  // Compute visual scale/opacity based on continuous scroll position
+  // Compute visual scale/opacity/z-index based on continuous scroll position
   const getCardStyle = (i: number) => {
     const distance = Math.abs(scrollProgress - i);
     const clamped = Math.min(distance, MAX_VISUAL_DISTANCE) / MAX_VISUAL_DISTANCE;
     const scale = 1 - clamped * (1 - MIN_SCALE);
     const opacity = 1 - clamped * (1 - MIN_OPACITY);
+    const zIndex = distance < 0.6 ? 10 : Math.round(10 - Math.min(distance, 10));
     return {
       transform: `scale(${scale})`,
       opacity,
+      zIndex,
       scrollSnapAlign: "center" as const,
     };
   };
