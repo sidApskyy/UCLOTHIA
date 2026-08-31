@@ -265,9 +265,6 @@ export default function Home() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] translate-y-3 group-hover:translate-y-0">
-                    <p className="text-[0.625rem] uppercase tracking-[0.2em] text-white/60 mb-2">
-                      {look.season}
-                    </p>
                     <p className="font-display text-xl md:text-2xl text-white font-light leading-tight mb-3">
                       {look.name}
                     </p>
