@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Hero } from "@/components/hero/hero";
 import { Reveal } from "@/components/motion/reveal";
 import { LookbookScroll } from "@/components/lookbook/lookbook-scroll";
+import { SpecularButton } from "@/components/ui/specular-button";
 import { collections, looks, stores } from "@/lib/data/content";
 
 export const metadata: Metadata = {
@@ -253,23 +254,24 @@ export default function Home() {
           </Reveal>
         </div>
         <LookbookScroll looks={featuredLooks} />
-        <div className="container-luxury mt-14 md:mt-20 flex flex-col items-center gap-6">
-          <Link
+        <div className="container-luxury pt-20 md:pt-32 flex flex-col items-center">
+          <SpecularButton
             href="/lookbook"
-            className="inline-flex items-center gap-3 text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] group"
+            size="md"
+            baseColor="#1a1a1a"
+            lineColor="#d4af37"
+            textColor="var(--color-text)"
+            tint="#ffffff"
+            tintOpacity={0.12}
+            blur={4}
+            intensity={1.4}
+            shineSize={12}
+            proximity={200}
+            followMouse
+            className="tracking-[0.2em] uppercase"
           >
-            <span className="h-px w-8 bg-[var(--color-border-strong)] transition-all duration-[var(--duration-medium)] group-hover:w-12" />
             View All Looks
-            <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1">→</span>
-          </Link>
-          <div className="md:hidden">
-            <p className="text-[0.625rem] uppercase tracking-[0.2em] text-[var(--color-muted)] flex items-center gap-2">
-              <span>Swipe</span>
-              <svg width="16" height="8" viewBox="0 0 16 8" fill="none" stroke="currentColor" strokeWidth="1">
-                <path d="M0 4h14M10 1l4 3-4 3" />
-              </svg>
-            </p>
-          </div>
+          </SpecularButton>
         </div>
       </section>
 
