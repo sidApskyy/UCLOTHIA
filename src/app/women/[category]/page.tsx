@@ -1,0 +1,43 @@
+import type { Metadata } from "next";
+import { products } from "@/lib/data/products";
+import { ProductGrid } from "@/components/product/product-grid";
+
+const VALID_CATEGORIES = ["sarees", "lehengas", "gowns", "suits", "kurtas", "kurta-sets", "jewellery"];
+
+export function generateStaticParams() {
+  return VALID_CATEGORIES.map((category) => ({ category }));
+}
+
+export function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  return params.then(({ category }) => {
+    const label = category.replace(/-/g, " ");
+    return {
+      title: `Women — ${label.charAt(0).toUpperCase() + label.slice(1)}`,
+      description: `UCLOTHIA Women — ${label} for every occasion.`,
+      alternates: { canonical: `/women/${category}` },
+    };
+  });
+}
+
+export default async function WomenCategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params;
+
+  const categoryMap: Record<string, string> = {
+    kurtas: "kurta-sets",
+  };
+  const actualCategory = categoryMap[category] || category;
+
+  const filtered = products.filter(
+    (p) => p.gender === "women" && p.category === actualCategory
+  );
+
+  const label = category.replace(/-/g, " ");
+
+  return (
+    <ProductGrid
+      products={filtered}
+      title={label.charAt(0).toUpperCase() + label.slice(1)}
+      eyebrow="Women"
+    />
+  );
+}
