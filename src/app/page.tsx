@@ -239,17 +239,32 @@ export default function Home() {
       {/* 06 — LOOKBOOK — HORIZONTAL EDITORIAL */}
       <section className="py-20 md:py-32 overflow-hidden">
         <div className="container-luxury">
-          <Reveal variant="fade" className="text-center mb-16 md:mb-24">
-            <p
-              className="mb-6 uppercase tracking-[0.25em] font-medium"
-              style={{ fontSize: "0.75rem", color: "var(--color-accent)" }}
-            >
-              Lookbook
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-light tracking-[-0.02em] leading-[1.1] mb-6">
-              The Looks
-            </h2>
-            <span className="inline-block h-px w-16 bg-[var(--color-border-strong)]" />
+          <Reveal variant="fade" className="mb-16 md:mb-24">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end">
+              <div className="md:col-span-7">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="h-px w-10 bg-[var(--color-accent)]" />
+                  <p
+                    className="uppercase tracking-[0.25em] font-medium"
+                    style={{ fontSize: "0.75rem", color: "var(--color-accent)" }}
+                  >
+                    Lookbook
+                  </p>
+                </div>
+                <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-[-0.02em] leading-[1.05]">
+                  The Looks
+                  <span className="block italic text-[var(--color-muted)]">Autumn Winter 2026</span>
+                </h2>
+              </div>
+              <div className="md:col-span-5 md:pb-3">
+                <p className="text-[0.9375rem] md:text-[1.0625rem] text-[var(--color-text-secondary)] leading-[1.7] max-w-md">
+                  Curated looks from the season — each ensemble styled with intention, restraint, and a contemporary eye for detail.
+                </p>
+              </div>
+            </div>
+            <div className="mt-10 md:mt-12">
+              <span className="inline-block h-px w-full max-w-xs bg-[var(--color-border-strong)]" />
+            </div>
           </Reveal>
         </div>
         <LookbookScroll looks={featuredLooks} />
