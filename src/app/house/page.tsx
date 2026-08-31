@@ -16,7 +16,7 @@ export default function HousePage() {
       {/* Hero */}
       <section className="relative h-[80vh] w-full overflow-hidden">
         <Image
-          src="/males group potrait.jpeg"
+          src="/males-group-potrait.jpeg"
           alt="The UCLOTHIA atelier"
           fill
           priority
@@ -111,9 +111,9 @@ export default function HousePage() {
         <div className="container-luxury">
           <Reveal className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             {[
-              { title: "Zardozi", desc: "Gold and silver thread embroidery, practised since the Mughal era.", img: "/hover single male 1.jpeg" },
-              { title: "Resham", desc: "Silk thread embroidery, delicate and precise, in the hands of master karigars.", img: "/hover single male 2.jpeg" },
-              { title: "Handloom", desc: "Handwoven textiles from heritage weaving clusters across India.", img: "/hover single male 3.jpeg" },
+              { title: "Zardozi", desc: "Gold and silver thread embroidery, practised since the Mughal era.", img: "/hover-single-male-1.jpeg" },
+              { title: "Resham", desc: "Silk thread embroidery, delicate and precise, in the hands of master karigars.", img: "/hover-single-male-2.jpeg" },
+              { title: "Handloom", desc: "Handwoven textiles from heritage weaving clusters across India.", img: "/hover-single-male-3.jpeg" },
             ].map((craft, i) => (
               <div key={craft.title} className={i === 1 ? "md:mt-16" : i === 2 ? "md:mt-32" : ""}>
                 <div className="relative aspect-square overflow-hidden bg-[var(--color-surface-alt)] image-editorial mb-6">

@@ -25,7 +25,7 @@ export default function WeddingsPage() {
       {/* Hero */}
       <section className="relative h-[85vh] w-full overflow-hidden">
         <Image
-          src="/mf 1.jpeg"
+          src="/mf-1.jpeg"
           alt="UCLOTHIA Wedding Atelier"
           fill
           priority

@@ -19,7 +19,7 @@ export const products: Product[] = [
     shipping: "Made to order — 4-6 weeks delivery",
     returns: "Made-to-order pieces are non-returnable",
     images: [
-      { src: "/women single potrait.jpeg", alt: "Ivory silk saree with gold embroidery", type: "front" },
+      { src: "/women-single-potrait.jpeg", alt: "Ivory silk saree with gold embroidery", type: "front" },
     ],
     variants: [
       { size: "Free Size", color: "Ivory", colorHex: "#F8F4EE", inStock: true },
@@ -76,7 +76,7 @@ export const products: Product[] = [
     shipping: "Ships within 2-3 business days",
     returns: "7-day return window",
     images: [
-      { src: "/women single potrait 2.jpeg", alt: "Black structured column gown", type: "front" },
+      { src: "/women-single-potrait-2.jpeg", alt: "Black structured column gown", type: "front" },
     ],
     variants: [
       { size: "XS", color: "Black", colorHex: "#1A1A1A", inStock: true },
@@ -106,7 +106,7 @@ export const products: Product[] = [
     shipping: "Made to order — 3-5 weeks delivery",
     returns: "Made-to-order pieces are non-returnable",
     images: [
-      { src: "/mf 1.jpeg", alt: "Emerald silk suit with resham embroidery", type: "front" },
+      { src: "/mf-1.jpeg", alt: "Emerald silk suit with resham embroidery", type: "front" },
     ],
     variants: [
       { size: "XS", color: "Emerald", colorHex: "#0B5D3B", inStock: true },
@@ -137,7 +137,7 @@ export const products: Product[] = [
     shipping: "Made to order — 4-6 weeks delivery",
     returns: "Made-to-order pieces are non-returnable",
     images: [
-      { src: "/male single potrait.jpeg", alt: "Ivory sherwani with gold thread work", type: "front" },
+      { src: "/male-single-potrait.jpeg", alt: "Ivory sherwani with gold thread work", type: "front" },
     ],
     variants: [
       { size: "38", color: "Ivory", colorHex: "#F8F4EE", inStock: true },
@@ -168,7 +168,7 @@ export const products: Product[] = [
     shipping: "Ships within 2-3 business days",
     returns: "7-day return window",
     images: [
-      { src: "/single male potraite 2.jpeg", alt: "Midnight blue bandhgala suit", type: "front" },
+      { src: "/single-male-potraite-2.jpeg", alt: "Midnight blue bandhgala suit", type: "front" },
     ],
     variants: [
       { size: "38", color: "Midnight Blue", colorHex: "#1B2A4A", inStock: true },
@@ -198,7 +198,7 @@ export const products: Product[] = [
     shipping: "Pre-order — 6-8 weeks delivery",
     returns: "Pre-order pieces are non-returnable",
     images: [
-      { src: "/WhatsApp Image 2026-08-26 at 12.08.38 AM.jpeg", alt: "Blush tulle gown with floral appliques", type: "front" },
+      { src: "/whatsapp-image-2.jpeg", alt: "Blush tulle gown with floral appliques", type: "front" },
     ],
     variants: [
       { size: "XS", color: "Blush", colorHex: "#E8C4C8", inStock: true },
@@ -226,7 +226,7 @@ export const products: Product[] = [
     shipping: "Ships within 1-2 business days",
     returns: "7-day return window",
     images: [
-      { src: "/mf 2.jpeg", alt: "Gold and pearl choker necklace", type: "front" },
+      { src: "/mf-2.jpeg", alt: "Gold and pearl choker necklace", type: "front" },
     ],
     variants: [
       { size: "One Size", color: "Gold", colorHex: "#C4A653", inStock: true },
@@ -252,7 +252,7 @@ export const products: Product[] = [
     shipping: "Ships within 2-3 business days",
     returns: "7-day return window",
     images: [
-      { src: "/males group potrait.jpeg", alt: "Charcoal linen kurta set", type: "front" },
+      { src: "/males-group-potrait.jpeg", alt: "Charcoal linen kurta set", type: "front" },
     ],
     variants: [
       { size: "38", color: "Charcoal", colorHex: "#36454F", inStock: true },
@@ -308,7 +308,7 @@ export const products: Product[] = [
     shipping: "Ships within 1-2 business days",
     returns: "7-day return window",
     images: [
-      { src: "/hohover single male 2.jpeg", alt: "Cream silk stole with thread border", type: "front" },
+      { src: "/hover-single-male-2.jpeg", alt: "Cream silk stole with thread border", type: "front" },
     ],
     variants: [
       { size: "One Size", color: "Cream", colorHex: "#F4E9D8", inStock: true },
@@ -335,7 +335,7 @@ export const products: Product[] = [
     shipping: "Bespoke — 8-12 weeks delivery",
     returns: "Bespoke pieces are non-returnable",
     images: [
-      { src: "/WhatsApp Image 2026-08-26 at 12.08.38 AM (1).jpeg", alt: "Deep maroon bridal lehenga with gold work", type: "front" },
+      { src: "/whatsapp-image-1.jpeg", alt: "Deep maroon bridal lehenga with gold work", type: "front" },
     ],
     variants: [
       { size: "Custom", color: "Deep Maroon", colorHex: "#6B2B2B", inStock: true },

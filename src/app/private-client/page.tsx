@@ -40,7 +40,7 @@ export default function PrivateClientPage() {
       {/* Hero */}
       <section className="relative h-[70vh] w-full overflow-hidden">
         <Image
-          src="/WhatsApp Image 2026-08-26 at 12.08.38 AM.jpeg"
+          src="/whatsapp-image-2.jpeg"
           alt="UCLOTHIA Private Client"
           fill
           priority

@@ -40,7 +40,7 @@ export const navigation: NavItem[] = [
       featured: {
         title: "The Evening Edit",
         href: "/collections/evening-edit",
-        image: "/WhatsApp Image 2026-08-26 at 12.08.38 AM (1).jpeg",
+        image: "/whatsapp-image-1.jpeg",
         imageAlt: "The Evening Edit collection",
       },
     },
@@ -81,7 +81,7 @@ export const navigation: NavItem[] = [
       featured: {
         title: "The Groom's Atelier",
         href: "/collections/grooms-atelier",
-        image: "/male single potrait.jpeg",
+        image: "/male-single-potrait.jpeg",
         imageAlt: "The Groom's Atelier collection",
       },
     },
@@ -112,7 +112,7 @@ export const navigation: NavItem[] = [
       featured: {
         title: "Heritage Revival",
         href: "/collections/heritage-revival",
-        image: "/women single potrait.jpeg",
+        image: "/women-single-potrait.jpeg",
         imageAlt: "Heritage Revival collection",
       },
     },

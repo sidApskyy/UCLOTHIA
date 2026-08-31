@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "UCLOTHIA — Couture, Ready-to-Wear & Craftsmanship",
     description:
       "A modern luxury fashion house where heritage Indian craftsmanship meets contemporary editorial vision.",
-    images: [{ url: "/WhatsApp Image 2026-08-26 at 12.08.38 AM (1).jpeg", alt: "UCLOTHIA Campaign" }],
+    images: [{ url: "/whatsapp-image-1.jpeg", alt: "UCLOTHIA Campaign" }],
     type: "website",
   },
 };
@@ -30,8 +30,8 @@ export default function Home() {
       <Hero
         images={[
           { src: "/og-campaign.jpg", alt: "UCLOTHIA — Campaign" },
-          { src: "/hero image 2.png", alt: "UCLOTHIA — Editorial" },
-          { src: "/hero image 3.png", alt: "UCLOTHIA — Atelier" },
+          { src: "/hero-image-2.png", alt: "UCLOTHIA — Editorial" },
+          { src: "/hero-image-3.png", alt: "UCLOTHIA — Atelier" },
         ]}
         label={heroCollection.season}
         title={heroCollection.name}
@@ -64,13 +64,13 @@ export default function Home() {
             <Reveal className="md:col-span-7 relative aspect-[4/5] md:aspect-[3/4] overflow-hidden" delay={100}>
               <Link href={`/collections/${editorialCollection.slug}`}>
                 <video
-                  src="/potrait video.mp4"
+                  src="/potrait-video.mp4"
                   autoPlay
                   loop
                   muted
                   playsInline
                   preload="metadata"
-                  poster="/women single potrait 2.jpeg"
+                  poster="/women-single-potrait-2.jpeg"
                   aria-label="UCLOTHIA Heritage Revival collection campaign video"
                   className="w-full h-full object-cover"
                 >
@@ -309,7 +309,7 @@ export default function Home() {
       {/* 07 — WEDDINGS — CINEMATIC */}
       <section className="relative h-[85vh] md:h-screen w-full overflow-hidden">
         <Image
-          src="/mf 1.jpeg"
+          src="/mf-1.jpeg"
           alt="UCLOTHIA Wedding Atelier campaign"
           fill
           priority
@@ -389,7 +389,7 @@ export default function Home() {
             <Reveal className="md:col-span-5" delay={100}>
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl group">
                 <Image
-                  src="/women single potrait 2.jpeg"
+                  src="/women-single-potrait-2.jpeg"
                   alt="UCLOTHIA artisan at work"
                   fill
                   sizes="(max-width: 768px) 100vw, 42vw"

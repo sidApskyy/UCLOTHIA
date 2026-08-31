@@ -10,10 +10,10 @@ export const collections: Collection[] = [
       "A study in after-dark elegance — architectural silhouettes, deep jewel tones, and a restrained approach to embellishment.",
     description:
       "The Evening Edit explores the tension between structure and fluidity. Each piece is designed for the hours that demand presence without excess. Velvet, crepe, and tulle are cut into clean lines, with embellishment placed strategically rather than liberally.",
-    heroImage: "/WhatsApp Image 2026-08-26 at 12.08.38 AM (1).jpeg",
+    heroImage: "/whatsapp-image-1.jpeg",
     heroImageAlt: "The Evening Edit — campaign hero",
     campaignImages: [
-      { src: "/women single potrait 2.jpeg", alt: "Evening Edit — look 01" },
+      { src: "/women-single-potrait-2.jpeg", alt: "Evening Edit — look 01" },
       { src: "/f1.jpeg", alt: "Evening Edit — look 02" },
     ],
     productIds: ["p002", "p003", "p007"],
@@ -27,11 +27,11 @@ export const collections: Collection[] = [
       "Redefining menswear for the modern groom — heritage silhouettes reimagined with contemporary precision.",
     description:
       "The Groom's Atelier is built on the principle that menswear deserves the same level of craft and consideration as couture. Raw silk sherwanis, wool bandhgalas, and linen kurtas are tailored with an eye for proportion, structure, and quiet luxury.",
-    heroImage: "/male single potrait.jpeg",
+    heroImage: "/male-single-potrait.jpeg",
     heroImageAlt: "The Groom's Atelier — campaign hero",
     campaignImages: [
-      { src: "/single male potraite 2.jpeg", alt: "Groom's Atelier — look 01" },
-      { src: "/hover single male 1.jpeg", alt: "Groom's Atelier — look 02" },
+      { src: "/single-male-potraite-2.jpeg", alt: "Groom's Atelier — look 01" },
+      { src: "/hover-single-male-1.jpeg", alt: "Groom's Atelier — look 02" },
     ],
     productIds: ["p005", "p006"],
   },
@@ -44,29 +44,29 @@ export const collections: Collection[] = [
       "Returning to the roots of Indian craft — reviving traditional techniques through a modern editorial lens.",
     description:
       "Heritage Revival is an ongoing dialogue between past and present. Each piece draws from the vocabulary of Indian textile traditions — zardozi, resham, mirror work — and recontextualizes them for the contemporary wardrobe. This is not nostalgia. This is continuity.",
-    heroImage: "/women single potrait.jpeg",
+    heroImage: "/women-single-potrait.jpeg",
     heroImageAlt: "Heritage Revival — campaign hero",
     campaignImages: [
       { src: "/f2.jpeg", alt: "Heritage Revival — look 01" },
-      { src: "/mf 2.jpeg", alt: "Heritage Revival — look 02" },
+      { src: "/mf-2.jpeg", alt: "Heritage Revival — look 02" },
     ],
     craftDetails: [
       {
         title: "The Silhouette",
         description: "Traditional drape reimagined with modern tailoring precision.",
-        image: "/hover single male 1.jpeg",
+        image: "/hover-single-male-1.jpeg",
         imageAlt: "Drape and silhouette detail",
       },
       {
         title: "The Material",
         description: "Pure Mysore silk, raw silk, and silk organza from heritage sources.",
-        image: "/hover single male 2.jpeg",
+        image: "/hover-single-male-2.jpeg",
         imageAlt: "Silk texture close-up",
       },
       {
         title: "The Craft",
         description: "Zardozi, resham, and mirror work by master karigars across India.",
-        image: "/hover single male 3.jpeg",
+        image: "/hover-single-male-3.jpeg",
         imageAlt: "Traditional embroidery detail",
       },
     ],
@@ -84,7 +84,7 @@ export const looks: Look[] = [
     slug: "look-01-the-column",
     name: "Look 01 — The Column",
     collection: "evening-edit",
-    image: "/women single potrait.jpeg",
+    image: "/women-single-potrait.jpeg",
     imageAlt: "Look 01 — The Column",
     productIds: ["p003", "p008"],
   },
@@ -93,7 +93,7 @@ export const looks: Look[] = [
     slug: "look-02-the-drape",
     name: "Look 02 — The Drape",
     collection: "heritage-revival",
-    image: "/women single potrait 2.jpeg",
+    image: "/women-single-potrait-2.jpeg",
     imageAlt: "Look 02 — The Drape",
     productIds: ["p001", "p008"],
   },
@@ -102,7 +102,7 @@ export const looks: Look[] = [
     slug: "look-03-the-groom",
     name: "Look 03 — The Groom",
     collection: "grooms-atelier",
-    image: "/male single potrait.jpeg",
+    image: "/male-single-potrait.jpeg",
     imageAlt: "Look 03 — The Groom",
     productIds: ["p005", "p011"],
   },
@@ -129,7 +129,7 @@ export const looks: Look[] = [
     slug: "look-06-the-evening",
     name: "Look 06 — The Evening",
     collection: "evening-edit",
-    image: "/mf 2.jpeg",
+    image: "/mf-2.jpeg",
     imageAlt: "Look 06 — The Evening",
     productIds: ["p007"],
   },
@@ -149,7 +149,7 @@ export const journalArticles: JournalArticle[] = [
     category: "Craft",
     date: "2026-08-15",
     readTime: "6 min read",
-    heroImage: "/WhatsApp Image 2026-08-26 at 12.08.38 AM.jpeg",
+    heroImage: "/whatsapp-image-2.jpeg",
     heroImageAlt: "Zardozi embroidery — editorial",
     content: [
       {
@@ -193,7 +193,7 @@ export const journalArticles: JournalArticle[] = [
     category: "Behind the Scenes",
     date: "2026-07-28",
     readTime: "5 min read",
-    heroImage: "/women single potrait 2.jpeg",
+    heroImage: "/women-single-potrait-2.jpeg",
     heroImageAlt: "Behind the Evening Edit — editorial",
     content: [
       {
@@ -229,7 +229,7 @@ export const journalArticles: JournalArticle[] = [
     category: "Fashion",
     date: "2026-07-10",
     readTime: "4 min read",
-    heroImage: "/hover single male 3.jpeg",
+    heroImage: "/hover-single-male-3.jpeg",
     heroImageAlt: "The modern groom — detail",
     content: [
       {
