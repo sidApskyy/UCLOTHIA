@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Hero } from "@/components/hero/hero";
 import { Reveal } from "@/components/motion/reveal";
+import { LookbookScroll } from "@/components/lookbook/lookbook-scroll";
 import { collections, looks, stores } from "@/lib/data/content";
 
 export const metadata: Metadata = {
@@ -198,26 +199,33 @@ export default function Home() {
                       alt={craft.imageAlt}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover object-[center_30%] transition-transform duration-[var(--duration-cinematic)] ease-[var(--ease-out)] group-hover:scale-110"
+                      className="object-cover object-[center_30%] transition-transform duration-[var(--duration-cinematic)] ease-[var(--ease-out)] group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--duration-medium)] rounded-2xl" />
-                    <span className="absolute top-5 left-5 text-[0.625rem] font-medium tracking-[0.2em] text-white/70 transition-colors duration-[var(--duration-medium)] group-hover:text-white">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <div className="transition-transform duration-[var(--duration-medium)] ease-[var(--ease-out)] group-hover:-translate-y-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="h-px w-8 bg-[var(--color-border-strong)] transition-all duration-[var(--duration-medium)] group-hover:w-12" />
-                      <p className="text-[0.625rem] uppercase tracking-[0.2em] text-[var(--color-muted)]">
-                        {craft.title}
-                      </p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] group-hover:from-black/80 rounded-2xl" />
+
+                    {/* Top accent line on hover */}
+                    <span className="absolute top-0 left-0 h-px w-0 bg-[var(--color-accent)] transition-all duration-[var(--duration-slow)] ease-[var(--ease-out)] group-hover:w-full rounded-2xl" />
+
+                    {/* Number — top left */}
+                    <div className="absolute top-5 left-5 flex items-center gap-3">
+                      <span className="text-[0.625rem] font-medium tracking-[0.2em] text-white/50 transition-colors duration-[var(--duration-medium)] group-hover:text-white/80">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="h-px w-0 bg-white/40 transition-all duration-[var(--duration-slow)] ease-[var(--ease-out)] group-hover:w-6" />
                     </div>
-                    <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-light mb-4 leading-[1.1]">
-                      {craft.title}
-                    </h3>
-                    <p className="text-[0.875rem] text-[var(--color-text-secondary)] leading-[1.7] max-w-sm">
-                      {craft.description}
-                    </p>
+
+                    {/* Overlay content — bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7">
+                      <div className="transition-transform duration-[var(--duration-medium)] ease-[var(--ease-out)] group-hover:-translate-y-1">
+                        <p className="text-[0.625rem] uppercase tracking-[0.25em] text-white/60 mb-3 transition-colors duration-[var(--duration-medium)] group-hover:text-white/90">
+                          {craft.title}
+                        </p>
+                        <h3 className="font-display text-xl md:text-2xl text-white font-light leading-[1.1] mb-3">
+                          {craft.description}
+                        </h3>
+                      </div>
+                      <span className="h-px w-12 bg-white/20 transition-all duration-[var(--duration-medium)] group-hover:w-20 group-hover:bg-white/40" />
+                    </div>
                   </div>
                 </div>
               </Reveal>
@@ -244,47 +252,8 @@ export default function Home() {
             <span className="inline-block h-px w-16 bg-[var(--color-border-strong)]" />
           </Reveal>
         </div>
-        <div className="horizontal-scroll">
-          <div className="flex gap-6 md:gap-8 pl-6 md:pl-12 pr-6 md:pr-12 pb-2" style={{ width: "max-content" }}>
-            {featuredLooks.map((look, i) => (
-              <Link
-                key={look.id}
-                href={`/lookbook/${look.slug}`}
-                className="group flex-shrink-0 w-[280px] md:w-[360px]"
-              >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
-                  <Image
-                    src={look.image}
-                    alt={look.imageAlt}
-                    fill
-                    sizes="360px"
-                    className="object-cover object-[center_30%] transition-transform duration-[var(--duration-cinematic)] ease-[var(--ease-out)] group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--duration-medium)] rounded-2xl" />
-                  <span className="absolute top-5 left-5 text-[0.625rem] font-medium tracking-[0.2em] text-white/50 transition-colors duration-[var(--duration-medium)] group-hover:text-white/80">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] translate-y-3 group-hover:translate-y-0">
-                    <p className="font-display text-xl md:text-2xl text-white font-light leading-tight mb-3">
-                      {look.name}
-                    </p>
-                    <span className="inline-flex items-center gap-2 text-[0.6875rem] font-medium tracking-[0.2em] uppercase text-white/80">
-                      <span className="h-px w-6 bg-white/40 transition-all duration-[var(--duration-medium)] group-hover:w-10" />
-                      Shop the Look
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-5 flex items-center justify-between transition-transform duration-[var(--duration-medium)] ease-[var(--ease-out)] group-hover:-translate-y-1">
-                  <span className="text-[0.8125rem] font-medium text-[var(--color-text)]">{look.name}</span>
-                  <span className="text-[0.625rem] uppercase tracking-[0.2em] text-[var(--color-muted)] group-hover:text-[var(--color-text)] transition-colors duration-[var(--duration-medium)]">
-                    Shop
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-        <div className="container-luxury mt-12 md:mt-16 flex justify-center">
+        <LookbookScroll looks={featuredLooks} />
+        <div className="container-luxury mt-14 md:mt-20 flex flex-col items-center gap-6">
           <Link
             href="/lookbook"
             className="inline-flex items-center gap-3 text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] group"
@@ -293,14 +262,14 @@ export default function Home() {
             View All Looks
             <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1">→</span>
           </Link>
-        </div>
-        <div className="container-luxury mt-6 md:hidden">
-          <p className="text-[0.625rem] uppercase tracking-[0.2em] text-[var(--color-muted)] flex items-center gap-2">
-            <span>Swipe</span>
-            <svg width="16" height="8" viewBox="0 0 16 8" fill="none" stroke="currentColor" strokeWidth="1">
-              <path d="M0 4h14M10 1l4 3-4 3" />
-            </svg>
-          </p>
+          <div className="md:hidden">
+            <p className="text-[0.625rem] uppercase tracking-[0.2em] text-[var(--color-muted)] flex items-center gap-2">
+              <span>Swipe</span>
+              <svg width="16" height="8" viewBox="0 0 16 8" fill="none" stroke="currentColor" strokeWidth="1">
+                <path d="M0 4h14M10 1l4 3-4 3" />
+              </svg>
+            </p>
+          </div>
         </div>
       </section>
 
