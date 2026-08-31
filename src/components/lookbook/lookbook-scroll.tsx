@@ -51,38 +51,33 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
     return () => media.removeEventListener("change", listener);
   }, []);
 
-  // Measure first-set width for seamless loop
+  // Measure card stride for seamless loop
   const firstSetWidthRef = useRef(0);
-  const updateFirstSetWidth = useCallback(() => {
+  const strideRef = useRef(0);
+  const updateStride = useCallback(() => {
     const track = trackRef.current;
-    if (!track) return;
-    const childCount = track.children.length;
-    if (childCount === 0) return;
-    const firstChild = track.children[0] as HTMLElement;
-    const marginRight = parseFloat(getComputedStyle(firstChild).marginRight || "0");
-    const cardWidth = firstChild.getBoundingClientRect().width + marginRight;
-    firstSetWidthRef.current = cardWidth * looks.length;
+    if (!track || track.children.length < 2) return;
+    const first = track.children[0].getBoundingClientRect();
+    const second = track.children[1].getBoundingClientRect();
+    strideRef.current = second.left - first.left;
+    firstSetWidthRef.current = strideRef.current * looks.length;
   }, [looks.length]);
 
   useEffect(() => {
-    updateFirstSetWidth();
-    window.addEventListener("resize", updateFirstSetWidth);
-    return () => window.removeEventListener("resize", updateFirstSetWidth);
-  }, [updateFirstSetWidth]);
+    updateStride();
+    window.addEventListener("resize", updateStride);
+    return () => window.removeEventListener("resize", updateStride);
+  }, [updateStride]);
 
   // Track active (real) index based on scroll position
   const updateActiveIndex = useCallback(() => {
     const container = containerRef.current;
-    const track = trackRef.current;
-    if (!container || !track) return;
-    const cards = Array.from(track.children);
-    if (!cards.length) return;
+    if (!container) return;
+    if (strideRef.current === 0) return;
 
-    const cardRect = cards[0].getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
-    const cardWidth = cardRect.width + parseFloat(getComputedStyle(cards[0]).marginRight || "0");
     const center = container.scrollLeft + containerRect.width / 2 - containerRect.left;
-    const realIdx = Math.round(center / cardWidth) % looks.length;
+    const realIdx = Math.round(center / strideRef.current) % looks.length;
     setActiveIndex((realIdx + looks.length) % looks.length);
   }, [looks.length]);
 
@@ -296,7 +291,6 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
         onPointerLeave={onPointerLeave}
-        style={{ scrollSnapType: isDragging ? "none" : "x mandatory" }}
       >
         <div
           ref={trackRef}
@@ -316,7 +310,6 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
                 style={{
                   opacity: Math.abs(realIndex - activeIndex) > 2 ? 0.35 : 1,
                   transform: `scale(${realIndex === activeIndex ? 1 : 0.96})`,
-                  scrollSnapAlign: "center",
                 }}
                 onClick={(e) => {
                   if (dragState.current.hasMoved) {
