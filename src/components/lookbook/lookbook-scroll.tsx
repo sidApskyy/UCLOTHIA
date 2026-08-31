@@ -9,22 +9,25 @@ interface LookbookScrollProps {
   looks: Look[];
 }
 
-const SCROLL_SPEED = 28; // pixels per second
-const DRAG_THRESHOLD = 12; // px before treating as drag vs click
-const MOMENTUM_DECAY = 0.92; // friction for inertia
-const RESUME_DELAY = 5000; // ms before auto-scroll resumes after interaction
+const AUTO_ADVANCE_MS = 1200; // ms between card changes
+const DRAG_THRESHOLD = 12;
+const MOMENTUM_DECAY = 0.92;
+const RESUME_DELAY = 5000;
+const MAX_VISUAL_DISTANCE = 2.8;
+const MIN_SCALE = 0.82;
+const MIN_OPACITY = 0.35;
 
 export function LookbookScroll({ looks }: LookbookScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [isInteracting, setIsInteracting] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  // Duplicate looks for seamless infinite loop
   const displayLooks = [...looks, ...looks];
 
-  // Drag / swipe physics
   const dragState = useRef({
     startX: 0,
     startY: 0,
@@ -36,24 +39,9 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
     isPointerDown: false,
   });
 
-  // Auto-scroll animation state
-  const autoScrollState = useRef({
-    lastTimestamp: 0,
-    rafId: 0,
-  });
-
-  // Detect reduced motion preference
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(media.matches);
-    const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
-
-  // Measure card stride for seamless loop
-  const firstSetWidthRef = useRef(0);
   const strideRef = useRef(0);
+  const firstSetWidthRef = useRef(0);
+
   const updateStride = useCallback(() => {
     const track = trackRef.current;
     if (!track || track.children.length < 2) return;
@@ -64,32 +52,54 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
   }, [looks.length]);
 
   useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(media.matches);
+    const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
+  useEffect(() => {
     updateStride();
     window.addEventListener("resize", updateStride);
     return () => window.removeEventListener("resize", updateStride);
   }, [updateStride]);
 
-  // Track active (real) index based on scroll position
-  const updateActiveIndex = useCallback(() => {
+  const updateScrollState = useCallback(() => {
     const container = containerRef.current;
-    if (!container) return;
-    if (strideRef.current === 0) return;
-
-    const containerRect = container.getBoundingClientRect();
-    const center = container.scrollLeft + containerRect.width / 2 - containerRect.left;
-    const realIdx = Math.round(center / strideRef.current) % looks.length;
+    if (!container || strideRef.current === 0) return;
+    const progress = container.scrollLeft / strideRef.current;
+    setScrollProgress(progress);
+    const realIdx = Math.round(progress) % looks.length;
     setActiveIndex((realIdx + looks.length) % looks.length);
   }, [looks.length]);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    const handleScroll = () => updateActiveIndex();
-    container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, [updateActiveIndex]);
+    const onScroll = () => updateScrollState();
+    container.addEventListener("scroll", onScroll, { passive: true });
+    return () => container.removeEventListener("scroll", onScroll);
+  }, [updateScrollState]);
 
-  // Scroll to a real index (0..looks.length-1), choosing the closest duplicate
+  // Seamless loop reset
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onScrollEnd = () => {
+      if (firstSetWidthRef.current === 0 || strideRef.current === 0) return;
+      const progress = container.scrollLeft / strideRef.current;
+      if (progress >= looks.length) {
+        container.scrollLeft -= firstSetWidthRef.current;
+      }
+    };
+
+    container.addEventListener("scrollend", onScrollEnd);
+    return () => container.removeEventListener("scrollend", onScrollEnd);
+  }, [looks.length]);
+
+  // Auto-advance
   const scrollToRealCard = useCallback((realIndex: number, smooth = true) => {
     const container = containerRef.current;
     const track = trackRef.current;
@@ -123,53 +133,26 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
     });
   }, [looks.length, prefersReducedMotion]);
 
-  // Auto-scroll loop (time-based, forward infinite)
-  const tick = useCallback((timestamp: number) => {
-    const { current: auto } = autoScrollState;
-    const container = containerRef.current;
-    if (!container) {
-      auto.rafId = requestAnimationFrame(tick);
-      return;
-    }
-
-    if (!isDragging && !prefersReducedMotion) {
-      const deltaTime = auto.lastTimestamp ? (timestamp - auto.lastTimestamp) / 1000 : 0;
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      const firstSetWidth = firstSetWidthRef.current;
-
-      if (maxScroll > 0) {
-        container.scrollLeft += SCROLL_SPEED * deltaTime;
-
-        // Seamless loop: reset to first set when reaching second set
-        if (firstSetWidth > 0 && container.scrollLeft >= firstSetWidth) {
-          container.scrollLeft -= firstSetWidth;
-        }
-      }
-    }
-
-    auto.lastTimestamp = timestamp;
-    auto.rafId = requestAnimationFrame(tick);
-  }, [isDragging, prefersReducedMotion]);
-
-  useEffect(() => {
-    autoScrollState.current.rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(autoScrollState.current.rafId);
-  }, [tick]);
-
-  // Resume auto-scroll after manual interaction
   const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const resumeAuto = useCallback(() => {
+  const pauseAuto = useCallback(() => {
+    setIsInteracting(true);
     if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-    resumeTimerRef.current = setTimeout(() => {
-      // no-op: auto-scroll always runs except while dragging
-    }, RESUME_DELAY);
+    resumeTimerRef.current = setTimeout(() => setIsInteracting(false), RESUME_DELAY);
   }, []);
 
-  // Pointer / touch handlers
+  useEffect(() => {
+    if (prefersReducedMotion || isDragging || isInteracting) return;
+    const interval = setInterval(() => {
+      const next = (activeIndex + 1) % looks.length;
+      scrollToRealCard(next, true);
+    }, AUTO_ADVANCE_MS);
+    return () => clearInterval(interval);
+  }, [activeIndex, isDragging, isInteracting, looks.length, prefersReducedMotion, scrollToRealCard]);
+
+  // Pointer handlers
   const onPointerDown = useCallback((e: React.PointerEvent) => {
     const container = containerRef.current;
     if (!container) return;
-
     container.setPointerCapture(e.pointerId);
     dragState.current = {
       startX: e.clientX,
@@ -181,14 +164,13 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
       hasMoved: false,
       isPointerDown: true,
     };
-
     setIsDragging(true);
-  }, []);
+    pauseAuto();
+  }, [pauseAuto]);
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {
     const container = containerRef.current;
     if (!container || !dragState.current.isPointerDown) return;
-
     const deltaX = e.clientX - dragState.current.startX;
     const deltaY = e.clientY - dragState.current.startY;
     const totalDelta = Math.hypot(deltaX, deltaY);
@@ -199,11 +181,10 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
 
     if (dragState.current.hasMoved) {
       container.scrollLeft = dragState.current.startScroll - deltaX;
-
       const now = performance.now();
       const dt = now - dragState.current.lastTime || 1;
       const dx = e.clientX - dragState.current.lastX;
-      dragState.current.velocity = -dx / dt * 16; // scale to per-frame velocity
+      dragState.current.velocity = -dx / dt * 16;
       dragState.current.lastX = e.clientX;
       dragState.current.lastTime = now;
     }
@@ -212,53 +193,31 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
   const onPointerUp = useCallback((e: React.PointerEvent) => {
     const container = containerRef.current;
     if (!container) return;
-
     const { current: drag } = dragState;
     drag.isPointerDown = false;
-
     if (container.hasPointerCapture(e.pointerId)) {
       container.releasePointerCapture(e.pointerId);
     }
 
     if (!drag.hasMoved) {
-      // Treat as click — navigation will happen through Link
       setIsDragging(false);
       return;
     }
 
-    // Apply momentum and snap to nearest real card
     const applyMomentum = () => {
       if (!container || drag.isPointerDown) return;
-
       container.scrollLeft += drag.velocity;
-
-      // Handle seamless loop wrap during momentum
-      const firstSetWidth = firstSetWidthRef.current;
-      if (firstSetWidth > 0 && container.scrollLeft >= firstSetWidth) {
-        container.scrollLeft -= firstSetWidth;
-      } else if (container.scrollLeft < 0) {
-        container.scrollLeft += firstSetWidth;
-      }
-
       drag.velocity *= MOMENTUM_DECAY;
-
-      const threshold = 0.5;
-      if (Math.abs(drag.velocity) > threshold) {
+      if (Math.abs(drag.velocity) > 0.5) {
         requestAnimationFrame(applyMomentum);
       } else {
-        snapToNearest();
+        setIsDragging(false);
+        scrollToRealCard(activeIndex, true);
       }
-    };
-
-    const snapToNearest = () => {
-      setIsDragging(false);
-      updateActiveIndex();
-      scrollToRealCard(activeIndex, true);
-      resumeAuto();
     };
 
     applyMomentum();
-  }, [activeIndex, resumeAuto, scrollToRealCard, updateActiveIndex]);
+  }, [activeIndex, scrollToRealCard]);
 
   const onPointerLeave = useCallback(() => {
     if (dragState.current.isPointerDown) {
@@ -271,11 +230,25 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
   const onKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
     e.preventDefault();
+    pauseAuto();
     const next = e.key === "ArrowLeft"
       ? Math.max(activeIndex - 1, 0)
       : Math.min(activeIndex + 1, looks.length - 1);
     scrollToRealCard(next, true);
-  }, [activeIndex, looks.length, scrollToRealCard]);
+  }, [activeIndex, looks.length, pauseAuto, scrollToRealCard]);
+
+  // Compute visual scale/opacity based on continuous scroll position
+  const getCardStyle = (i: number) => {
+    const distance = Math.abs(scrollProgress - i);
+    const clamped = Math.min(distance, MAX_VISUAL_DISTANCE) / MAX_VISUAL_DISTANCE;
+    const scale = 1 - clamped * (1 - MIN_SCALE);
+    const opacity = 1 - clamped * (1 - MIN_OPACITY);
+    return {
+      transform: `scale(${scale})`,
+      opacity,
+      scrollSnapAlign: "center" as const,
+    };
+  };
 
   return (
     <div className="relative" role="region" aria-label="Lookbook carousel" onKeyDown={onKeyDown} tabIndex={0}>
@@ -291,6 +264,7 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
         onPointerLeave={onPointerLeave}
+        style={{ scrollSnapType: isDragging ? "none" : "x mandatory" }}
       >
         <div
           ref={trackRef}
@@ -300,6 +274,7 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
           {displayLooks.map((look, i) => {
             const realIndex = i % looks.length;
             const displayIndex = i < looks.length ? i : i - looks.length;
+            const cardStyle = getCardStyle(i);
             return (
               <Link
                 key={`${look.id}-${i}`}
@@ -307,10 +282,7 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
                 aria-label={`${look.name} — Shop the Look`}
                 data-real-index={realIndex}
                 className="group flex-shrink-0 w-[280px] md:w-[360px] transition-[transform,opacity] duration-[var(--duration-medium)] ease-[var(--ease-out)]"
-                style={{
-                  opacity: Math.abs(realIndex - activeIndex) > 2 ? 0.35 : 1,
-                  transform: `scale(${realIndex === activeIndex ? 1 : 0.96})`,
-                }}
+                style={cardStyle}
                 onClick={(e) => {
                   if (dragState.current.hasMoved) {
                     e.preventDefault();
@@ -364,7 +336,10 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
         {looks.map((_, i) => (
           <button
             key={i}
-            onClick={() => scrollToRealCard(i, true)}
+            onClick={() => {
+              pauseAuto();
+              scrollToRealCard(i, true);
+            }}
             className="group/dot p-2"
             aria-label={`Go to look ${i + 1}`}
             aria-current={i === activeIndex ? "true" : undefined}
