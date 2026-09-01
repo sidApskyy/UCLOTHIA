@@ -140,32 +140,38 @@ export function Hero({
       )}
 
       <div
-        className={`relative h-full flex flex-col items-center justify-center text-center transition-opacity duration-[600ms] ease-[var(--ease-out)] ${
+        className={`relative h-full flex flex-col items-center justify-center text-center transition-opacity duration-[800ms] ease-[var(--ease-out)] ${
           activeIndex === 0 ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="container-luxury">
           {label && (
-            <p className="text-eyebrow text-white/70 mb-5 md:mb-6">
-              {label}
-            </p>
+            <div className="overflow-hidden mb-5 md:mb-6">
+              <p className="text-eyebrow text-white/70 animate-[fade-in-up_800ms_cubic-bezier(0.16,1,0.3,1)_forwards]">
+                {label}
+              </p>
+            </div>
           )}
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.05] tracking-[-0.02em]">
-            {title}
-          </h1>
+          <div className="overflow-hidden">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.05] tracking-[-0.02em] animate-[fade-in-up_1000ms_cubic-bezier(0.16,1,0.3,1)_150ms_forwards]">
+              {title}
+            </h1>
+          </div>
           {subtitle && (
-            <p className="mt-6 md:mt-8 text-[0.9375rem] md:text-[1.125rem] text-white/80 max-w-md mx-auto leading-relaxed font-light">
+            <p className="mt-6 md:mt-8 text-[0.9375rem] md:text-[1.125rem] text-white/80 max-w-md mx-auto leading-relaxed font-light animate-[fade-in_1000ms_cubic-bezier(0.16,1,0.3,1)_300ms_forwards]">
               {subtitle}
             </p>
           )}
           {ctaLabel && ctaHref && (
-            <Link
-              href={ctaHref}
-              className="editorial-link mt-10 md:mt-12 text-white"
-            >
-              {ctaLabel}
-              <span className="editorial-link-arrow">→</span>
-            </Link>
+            <div className="mt-10 md:mt-12">
+              <Link
+                href={ctaHref}
+                className="editorial-link text-white animate-[fade-in_1000ms_cubic-bezier(0.16,1,0.3,1)_450ms_forwards]"
+              >
+                {ctaLabel}
+                <span className="editorial-link-arrow">→</span>
+              </Link>
+            </div>
           )}
         </div>
       </div>

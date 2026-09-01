@@ -3,11 +3,11 @@
 import { useEffect, useRef, type ReactNode } from "react";
 
 interface RevealProps {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
   delay?: number;
-  as?: "div" | "section" | "article" | "li" | "span";
-  variant?: "fade-up" | "fade" | "clip";
+  as?: "div" | "section" | "article" | "li" | "span" | "p" | "h1" | "h2" | "h3";
+  variant?: "fade-up" | "fade" | "clip" | "mask" | "line" | "image";
 }
 
 export function Reveal({
@@ -43,16 +43,29 @@ export function Reveal({
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
   }, [delay]);
 
+  const variantClass = {
+    "fade-up": "reveal",
+    fade: "reveal-fade",
+    clip: "clip-reveal",
+    mask: "reveal-mask",
+    line: "reveal-line",
+    image: "reveal-image",
+  }[variant];
+
   return (
-    <Tag ref={ref as never} className={`${variant === "clip" ? "clip-reveal" : variant === "fade" ? "reveal-fade" : "reveal"} ${className}`}>
-      {children}
+    <Tag ref={ref as never} className={`${variantClass} ${className}`}>
+      {variant === "mask" ? (
+        <span className="reveal-mask-inner block">{children}</span>
+      ) : (
+        children
+      )}
     </Tag>
   );
 }

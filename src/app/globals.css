@@ -274,7 +274,7 @@ body {
 /* — Reveal animation base — */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(20px);
   transition: opacity var(--duration-slow) var(--ease-out),
     transform var(--duration-slow) var(--ease-out);
 }
@@ -287,11 +287,61 @@ body {
 /* — Fade-only reveal (for metadata, small text) — */
 .reveal-fade {
   opacity: 0;
-  transition: opacity var(--duration-medium) var(--ease-out);
+  transition: opacity var(--duration-slow) var(--ease-out);
 }
 
 .reveal-fade.is-visible {
   opacity: 1;
+}
+
+/* — Masked slide-up reveal (for luxury editorial headlines) — */
+.reveal-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.reveal-mask-inner {
+  transform: translateY(110%);
+  opacity: 0;
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 600ms var(--ease-out);
+  will-change: transform, opacity;
+}
+
+.reveal-mask.is-visible .reveal-mask-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* — Line draw reveal (for gold accent dividers) — */
+.reveal-line {
+  display: inline-block;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.reveal-line.is-visible {
+  transform: scaleX(1);
+}
+
+/* — Luxury image scale unmasking — */
+.reveal-image {
+  overflow: hidden;
+}
+
+.reveal-image img {
+  transform: scale(1.1);
+  filter: brightness(0.95);
+  transition: transform 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 900ms var(--ease-out);
+  will-change: transform, filter;
+}
+
+.reveal-image.is-visible img {
+  transform: scale(1);
+  filter: brightness(1);
 }
 
 /* — Image hover transitions — */
@@ -714,14 +764,15 @@ select.appearance-none {
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 300ms var(--ease-out), height 300ms var(--ease-out),
-      background 300ms var(--ease-out), border-color 300ms var(--ease-out);
+    transition: width 250ms cubic-bezier(0.16, 1, 0.3, 1),
+      height 250ms cubic-bezier(0.16, 1, 0.3, 1),
+      background 250ms var(--ease-out), border-color 250ms var(--ease-out);
     mix-blend-mode: difference;
   }
 
   .cursor-luxury.cursor-expand {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background: var(--color-text);
   }
 }

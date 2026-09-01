@@ -28,7 +28,7 @@ export function CustomCursor() {
       mouseY = e.clientY;
 
       const target = e.target as HTMLElement;
-      const interactive = target.closest("a, button, input, select, textarea, [data-cursor]");
+      const interactive = target.closest("a, button, input, select, textarea");
 
       if (interactive) {
         setCursorClass("cursor-expand");
