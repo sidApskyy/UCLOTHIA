@@ -111,9 +111,11 @@ export function Header() {
           <div className="flex items-center justify-between h-20 md:h-24">
             {/* Mobile menu button */}
             <button
-              className={`md:hidden flex flex-col gap-[5px] p-2 -ml-2`}
+              className={`md:hidden flex flex-col gap-[5px] p-3 -ml-3`}
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
             >
               <span className={`w-6 h-[1px] ${hamburgerColor}`} />
               <span className={`w-6 h-[1px] ${hamburgerColor}`} />
@@ -133,7 +135,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     aria-current={pathname.startsWith(item.href) ? "page" : undefined}
-                    className={`text-[0.8125rem] font-medium tracking-[0.14em] uppercase transition-colors duration-[var(--duration-medium)] link-underline ${
+                    className={`inline-block py-1 text-[0.8125rem] font-medium tracking-[0.14em] uppercase transition-colors duration-[var(--duration-medium)] link-underline ${
                       pathname.startsWith(item.href)
                         ? activeLinkColor
                         : linkColor
@@ -168,7 +170,7 @@ export function Header() {
                   key={item.label}
                   href={item.href}
                   aria-current={pathname.startsWith(item.href) ? "page" : undefined}
-                  className={`text-[0.8125rem] font-medium tracking-[0.12em] uppercase transition-colors duration-[var(--duration-medium)] link-underline ${
+                  className={`inline-block py-1 text-[0.8125rem] font-medium tracking-[0.12em] uppercase transition-colors duration-[var(--duration-medium)] link-underline ${
                     pathname.startsWith(item.href)
                       ? activeLinkColor
                       : linkColor
@@ -183,7 +185,7 @@ export function Header() {
             <div className="flex items-center gap-4 md:gap-5">
               <Link
                 href="/search"
-                className={`${iconColor} transition-colors`}
+                className={`p-2 -m-2 ${iconColor} transition-colors`}
                 aria-label="Search"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -193,7 +195,7 @@ export function Header() {
               </Link>
               <Link
                 href="/wishlist"
-                className={`hidden md:block ${iconColor} transition-colors`}
+                className={`hidden md:block p-2 -m-2 ${iconColor} transition-colors`}
                 aria-label="Wishlist"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -202,7 +204,7 @@ export function Header() {
               </Link>
               <button
                 onClick={openCart}
-                className={`relative ${iconColor} transition-colors`}
+                className={`relative p-2 -m-2 ${iconColor} transition-colors`}
                 aria-label="Shopping bag"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

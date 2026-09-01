@@ -9,7 +9,7 @@ export function Footer() {
       <div className="border-b border-white/10">
         <div className="container-luxury py-24 md:py-36 text-center">
           <p className="text-micro text-white/40 mb-12">UCLOTHIA / India</p>
-          <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-light leading-[1.0] tracking-[-0.02em] text-white">
+          <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light leading-[1.0] tracking-[-0.02em] text-white break-words">
             UCLOTHIA
           </h2>
           <p className="font-display text-xl md:text-2xl font-light italic leading-[1.4] max-w-xl mx-auto text-white/60 mt-8">
@@ -45,7 +45,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                    className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
                   >
                     {link.label}
                   </Link>
@@ -61,7 +61,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                    className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
                   >
                     {link.label}
                   </Link>
@@ -77,7 +77,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                    className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
                   >
                     {link.label}
                   </Link>
@@ -93,7 +93,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                    className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
                   >
                     {link.label}
                   </Link>
@@ -110,7 +110,7 @@ export function Footer() {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                  className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
                 >
                   Instagram
                 </a>
@@ -120,7 +120,7 @@ export function Footer() {
                   href="https://youtube.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                  className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
                 >
                   YouTube
                 </a>
@@ -128,7 +128,7 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:contact@uclothia.com"
-                  className="text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                  className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
                 >
                   Contact
                 </a>

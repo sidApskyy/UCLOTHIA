@@ -44,10 +44,15 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           open ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}
+        aria-hidden={!open}
       />
 
       {/* Panel */}
       <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Main menu"
         className={`fixed top-0 left-0 bottom-0 w-full max-w-sm bg-[var(--color-surface)] z-[var(--z-mobile-menu)] overflow-y-auto transition-transform duration-[var(--duration-medium)] md:hidden ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}

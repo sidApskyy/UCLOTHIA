@@ -134,7 +134,7 @@ export function CartDrawer() {
                         onClick={() =>
                           removeItem(item.productId, item.size, item.color)
                         }
-                        className="text-[0.6875rem] tracking-[0.1em] uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors py-1"
+                        className="inline-block text-[0.6875rem] tracking-[0.1em] uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors py-2"
                         aria-label={`Remove ${item.name} from bag`}
                       >
                         Remove
@@ -175,7 +175,7 @@ export function CartDrawer() {
             </Link>
             <button
               onClick={closeCart}
-              className="w-full text-center text-[0.75rem] tracking-[0.1em] uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors"
+              className="w-full text-center text-[0.75rem] tracking-[0.1em] uppercase text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors py-2"
             >
               Continue Shopping
             </button>

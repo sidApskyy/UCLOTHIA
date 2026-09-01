@@ -4,8 +4,8 @@ import { stores } from "@/lib/data/content";
 import { Reveal } from "@/components/motion/reveal";
 
 export const metadata: Metadata = {
-  title: "Stores",
-  description: "Visit UCLOTHIA ateliers in Mumbai, Delhi, and Bangalore.",
+  title: "Visit Us — UCLOTHIA Pune",
+  description: "Visit the UCLOTHIA flagship salon in Pune.",
   alternates: { canonical: "/stores" },
 };
 
@@ -17,7 +17,7 @@ export default function StoresPage() {
           <span className="h-px w-12 bg-[var(--color-border-strong)]" />
           <p className="text-eyebrow-accent">Visit Us</p>
         </div>
-        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-[-0.02em]">Our Stores</h1>
+        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-[-0.02em]">Our Salon</h1>
       </div>
 
       <div className="container-luxury pb-24 md:pb-40 space-y-24 md:space-y-40">
@@ -51,17 +51,20 @@ export default function StoresPage() {
                   <Link href={store.appointmentUrl} className="btn-primary">
                     Book Appointment
                   </Link>
-                  <Link href={`/stores/${store.slug}`} className="btn-secondary">
-                    View Store
-                  </Link>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store.address)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-secondary"
+                  >
+                    Get Directions
+                  </a>
                 </div>
               </div>
               <div className={`${i % 2 === 1 ? "md:order-2" : "md:order-1"}`}>
                 <div className="border-t border-[var(--color-border)] pt-6">
                   <p className="text-editorial text-[var(--color-muted)] italic">
-                    {store.city === "Mumbai" && "Where the house began. Our flagship atelier in Bandra West."}
-                    {store.city === "New Delhi" && "In the heart of the capital. A space designed for private appointments."}
-                    {store.city === "Bangalore" && "Our southern atelier. Craft conversations in a serene setting."}
+                    {store.city === "Pune" && "Our first atelier. A private salon for fittings, consultations, and craft."}
                   </p>
                 </div>
               </div>

@@ -438,8 +438,8 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
       </div>
 
       {/* Edge fade gradients */}
-      <div className="absolute left-0 top-0 bottom-0 w-10 md:w-28 bg-gradient-to-r from-[var(--color-background)] to-transparent z-20 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-10 md:w-28 bg-gradient-to-l from-[var(--color-background)] to-transparent z-20 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-6 md:w-28 bg-gradient-to-r from-[var(--color-background)] to-transparent z-20 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-6 md:w-28 bg-gradient-to-l from-[var(--color-background)] to-transparent z-20 pointer-events-none" />
 
       <div
         ref={containerRef}
@@ -453,7 +453,7 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
       >
         <div
           ref={trackRef}
-          className="flex gap-4 md:gap-6 pl-6 md:pl-12 pr-6 md:pr-12 py-10 md:py-14"
+          className="flex gap-3 md:gap-6 pl-4 md:pl-12 pr-4 md:pr-12 py-8 md:py-14"
           style={{ width: "max-content", transformStyle: "preserve-3d" }}
         >
           {displayLooks.map((look, i) => {
@@ -466,7 +466,7 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
                 href={`/lookbook/${look.slug}`}
                 aria-label={`${look.name} — Shop the Look`}
                 data-real-index={realIndex}
-                className="group relative flex-shrink-0 w-[260px] md:w-[340px] lg:w-[380px] will-change-transform"
+                className="group relative flex-shrink-0 w-[210px] md:w-[340px] lg:w-[380px] will-change-transform"
                 style={{ scrollSnapAlign: "center" }}
                 onClick={(e) => {
                   if (dragState.current.hasMoved) {
@@ -480,7 +480,7 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
                     src={look.image}
                     alt={look.imageAlt}
                     fill
-                    sizes="(max-width: 768px) 80vw, (max-width: 1024px) 40vw, 380px"
+                    sizes="(max-width: 768px) 75vw, (max-width: 1024px) 40vw, 380px"
                     className="object-cover object-[center_30%] transition-transform duration-[var(--duration-cinematic)] ease-[var(--ease-out)] group-hover:scale-105"
                     draggable={false}
                   />
@@ -492,7 +492,7 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
                   <span className="absolute top-0 left-0 h-px w-0 bg-[var(--color-accent)] transition-all duration-[var(--duration-slow)] ease-[var(--ease-out)] group-hover:w-full" />
 
                   {/* Number */}
-                  <div className="absolute top-5 left-5 flex items-center gap-3">
+                  <div className="absolute top-4 left-4 flex items-center gap-3">
                     <span className="text-[0.625rem] font-medium tracking-[0.2em] text-white/60 transition-colors duration-[var(--duration-medium)] group-hover:text-white/90">
                       {String(displayIndex + 1).padStart(2, "0")}
                     </span>
@@ -500,15 +500,15 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
                   </div>
 
                   {/* Bottom content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-7 md:p-9">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 md:p-9">
                     <div className="transform transition-transform duration-[var(--duration-medium)] ease-[var(--ease-out)] group-hover:-translate-y-3">
-                      <h3 className="font-display text-2xl md:text-3xl text-white font-light leading-[1.1] mb-6">
+                      <h3 className="font-display text-xl md:text-3xl text-white font-light leading-[1.1] mb-4 md:mb-6">
                         {look.name}
                       </h3>
                     </div>
 
                     {/* CTA */}
-                    <span className="inline-flex items-center gap-3 text-[0.625rem] md:text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-white/60 group-hover:text-white transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)]">
+                    <span className="inline-flex items-center gap-3 text-[0.6rem] md:text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-white/60 group-hover:text-white transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)]">
                       <span className="h-px w-6 bg-white/30 transition-all duration-[var(--duration-medium)] group-hover:w-10 group-hover:bg-white/70" />
                       Shop the Look
                       <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1.5">→</span>
