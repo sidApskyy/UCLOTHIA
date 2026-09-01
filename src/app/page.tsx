@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Hero } from "@/components/hero/hero";
 import { Reveal } from "@/components/motion/reveal";
 import { Parallax } from "@/components/motion/parallax";
+import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { EditorialMarquee } from "@/components/motion/editorial-marquee";
 import { LookbookScroll } from "@/components/lookbook/lookbook-scroll";
 import { SpecularButton } from "@/components/ui/specular-button";
 import { collections, looks, stores } from "@/lib/data/content";
@@ -29,6 +31,9 @@ export default function Home() {
 
   return (
     <>
+      {/* Global Luxury Scroll Progress Hairline */}
+      <ScrollProgress />
+
       {/* 01 — HERO — CINEMATIC */}
       <Hero
         images={[
@@ -41,8 +46,8 @@ export default function Home() {
       />
       {/* 02 — BRAND MANIFESTO — MINIMAL */}
       <section className="relative min-h-[55vh] flex items-center justify-center py-32 md:py-48 overflow-hidden">
-        {/* Subtle luxury ambient glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35rem] h-[35rem] bg-[var(--color-accent)]/5 rounded-full blur-3xl pointer-events-none" />
+        {/* Subtle luxury ambient breathing glow */}
+        <div className="absolute top-1/2 left-1/2 w-[35rem] h-[35rem] bg-[var(--color-accent)] rounded-full blur-3xl pointer-events-none animate-aura" />
         <div className="container-luxury text-center relative z-10">
           <Reveal variant="fade">
             <p
@@ -132,42 +137,45 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {collections.map((collection, i) => (
-              <Reveal key={collection.id} delay={i * 150} variant="image">
+              <Reveal key={collection.id} delay={i * 120} variant="image">
                 <Link
                   href={`/collections/${collection.slug}`}
-                  className="group block relative aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl transition-all duration-[var(--duration-slow)] ease-[var(--ease-out)] md:shadow-none md:hover:shadow-2xl md:hover:shadow-black/30"
+                  className="group block relative aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl transition-all duration-700 ease-[var(--ease-out)] shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-black/30"
                 >
                   <Image
                     src={collection.heroImage}
                     alt={collection.heroImageAlt}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover object-[center_30%] transition-transform duration-[var(--duration-cinematic)] ease-[var(--ease-out)] group-hover:scale-110"
+                    className="object-cover object-[center_30%] transition-all duration-1000 ease-[var(--ease-out)] group-hover:scale-108 group-hover:brightness-105"
                     priority={i === 0}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5 transition-all duration-[var(--duration-medium)] group-hover:from-black/90 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 transition-all duration-700 group-hover:from-black/90 rounded-2xl pointer-events-none" />
+
+                  {/* Gold perimeter hairline trace on hover */}
+                  <div className="absolute inset-0 rounded-2xl border border-white/10 group-hover:border-[var(--color-accent)]/60 transition-colors duration-700 pointer-events-none z-10" />
 
                   {/* Index number — top left with decorative line */}
-                  <div className="absolute top-6 left-6 md:top-8 md:left-8 flex items-center gap-3 transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)]">
-                    <span className="text-[0.75rem] font-medium tracking-[0.2em] text-white/40 transition-colors duration-[var(--duration-medium)] group-hover:text-white/70">
+                  <div className="absolute top-6 left-6 md:top-8 md:left-8 flex items-center gap-3 transition-all duration-500 ease-[var(--ease-out)] z-10">
+                    <span className="text-[0.75rem] font-medium tracking-[0.2em] text-white/50 transition-all duration-500 group-hover:text-[var(--color-accent)] group-hover:tracking-[0.25em]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="h-px w-0 bg-white/40 transition-all duration-[var(--duration-slow)] ease-[var(--ease-out)] group-hover:w-8" />
+                    <span className="h-px w-0 bg-[var(--color-accent)] transition-all duration-700 ease-[var(--ease-out)] group-hover:w-10" />
                   </div>
 
-                  <div className="absolute inset-0 flex flex-col justify-end items-center text-center p-7 md:p-8 lg:p-10">
+                  <div className="absolute inset-0 flex flex-col justify-end items-center text-center p-7 md:p-8 lg:p-10 z-10">
                     <div>
-                      <p className="text-[0.75rem] uppercase tracking-[0.25em] text-white/50 mb-4 transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] group-hover:text-white/80">
+                      <p className="text-[0.75rem] uppercase tracking-[0.25em] text-white/60 mb-4 transition-all duration-500 ease-[var(--ease-out)] group-hover:text-white/90">
                         {collection.season}
                       </p>
                       <h3 className="font-display text-2xl md:text-3xl lg:text-4xl text-white font-light leading-[1.05] tracking-[-0.01em]">
                         {collection.name}
                       </h3>
                     </div>
-                    <span className="h-px w-16 bg-white/10 my-6 transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] group-hover:bg-white/25 group-hover:w-24" />
-                    <span className="inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.25em] uppercase text-white/50 group-hover:text-white transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)]">
+                    <span className="h-px w-16 bg-white/15 my-6 transition-all duration-500 ease-[var(--ease-out)] group-hover:bg-[var(--color-accent)] group-hover:w-24" />
+                    <span className="inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.25em] uppercase text-white/60 group-hover:text-white transition-all duration-500 ease-[var(--ease-out)]">
                       Explore
-                      <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1">→</span>
+                      <span className="transition-transform duration-500 group-hover:translate-x-1.5">→</span>
                     </span>
                   </div>
                 </Link>
@@ -198,40 +206,40 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             {(editorialCollection.craftDetails || []).map((craft, i) => (
-              <Reveal key={craft.title} delay={i * 150} variant="image">
+              <Reveal key={craft.title} delay={i * 120} variant="image">
                 <div className="group cursor-pointer">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl mb-6">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl mb-6 shadow-md shadow-black/5 hover:shadow-xl hover:shadow-black/20 transition-shadow duration-700">
                     <Image
                       src={craft.image}
                       alt={craft.imageAlt}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover object-[center_30%] transition-transform duration-[var(--duration-cinematic)] ease-[var(--ease-out)] group-hover:scale-105"
+                      className="object-cover object-[center_30%] transition-all duration-1000 ease-[var(--ease-out)] group-hover:scale-108 group-hover:brightness-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] group-hover:from-black/80 rounded-2xl" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent transition-all duration-700 ease-[var(--ease-out)] group-hover:from-black/85 rounded-2xl pointer-events-none" />
 
-                    {/* Top accent line on hover */}
-                    <span className="absolute top-0 left-0 h-px w-0 bg-[var(--color-accent)] transition-all duration-[var(--duration-slow)] ease-[var(--ease-out)] group-hover:w-full rounded-2xl" />
+                    {/* Gold hairline border trace */}
+                    <div className="absolute inset-0 rounded-2xl border border-white/10 group-hover:border-[var(--color-accent)]/60 transition-colors duration-700 pointer-events-none z-10" />
 
                     {/* Number — top left */}
-                    <div className="absolute top-5 left-5 flex items-center gap-3">
-                      <span className="text-[0.75rem] font-medium tracking-[0.2em] text-white/50 transition-colors duration-[var(--duration-medium)] group-hover:text-white/80">
+                    <div className="absolute top-5 left-5 flex items-center gap-3 z-10">
+                      <span className="text-[0.75rem] font-medium tracking-[0.2em] text-white/60 transition-all duration-500 group-hover:text-[var(--color-accent)]">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="h-px w-0 bg-white/40 transition-all duration-[var(--duration-slow)] ease-[var(--ease-out)] group-hover:w-6" />
+                      <span className="h-px w-0 bg-[var(--color-accent)] transition-all duration-700 ease-[var(--ease-out)] group-hover:w-8" />
                     </div>
 
                     {/* Overlay content — bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7">
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7 z-10">
                       <div>
-                        <p className="text-[0.75rem] uppercase tracking-[0.25em] text-white/60 mb-3 transition-colors duration-[var(--duration-medium)] group-hover:text-white/90">
+                        <p className="text-[0.75rem] uppercase tracking-[0.25em] text-white/60 mb-3 transition-colors duration-500 group-hover:text-white/90">
                           {craft.title}
                         </p>
                         <h3 className="font-display text-xl md:text-2xl text-white font-light leading-[1.1] mb-3">
                           {craft.description}
                         </h3>
                       </div>
-                      <span className="h-px w-12 bg-white/20 transition-all duration-[var(--duration-medium)] group-hover:w-20 group-hover:bg-white/40" />
+                      <span className="h-px w-12 bg-white/20 transition-all duration-500 group-hover:w-20 group-hover:bg-[var(--color-accent)]" />
                     </div>
                   </div>
                 </div>
@@ -260,76 +268,81 @@ export default function Home() {
           </Reveal>
         </div>
         <LookbookScroll looks={featuredLooks} />
-        <div className="container-luxury pt-20 md:pt-32 flex flex-col items-center">
-          <SpecularButton
-            href="/lookbook"
-            size="md"
-            baseColor="#1a1a1a"
-            lineColor="#d4af37"
-            textColor="var(--color-text)"
-            tint="#ffffff"
-            tintOpacity={0.12}
-            blur={4}
-            intensity={1.4}
-            shineSize={12}
-            proximity={200}
-            followMouse
-            className="tracking-[0.2em] uppercase"
-          >
-            View All Looks
-          </SpecularButton>
+        <div className="container-luxury pt-14 md:pt-20 flex justify-center">
+          <Reveal variant="fade" delay={150}>
+            <SpecularButton
+              href="/lookbook"
+              size="md"
+              baseColor="#1a1a1a"
+              lineColor="#d4af37"
+              textColor="var(--color-text)"
+              tint="#ffffff"
+              tintOpacity={0.12}
+              blur={4}
+              intensity={1.4}
+              shineSize={12}
+              proximity={200}
+              followMouse
+              className="tracking-[0.2em] uppercase"
+            >
+              View All Looks
+            </SpecularButton>
+          </Reveal>
         </div>
       </section>
 
-      <div className="h-24 md:h-32" />
+      <div className="h-16 md:h-24" />
+
+      {/* EDITORIAL RUNWAY MARQUEE RIBBON */}
+      <EditorialMarquee />
+
+      <div className="h-16 md:h-24" />
 
       {/* 07 — WEDDINGS — CINEMATIC */}
-      <section className="relative h-[85vh] md:h-screen w-full overflow-hidden">
-        <Parallax speed={-0.12} className="absolute inset-0 h-[120%] -top-[10%] w-full">
+      <section className="relative min-h-[85vh] md:min-h-screen w-full overflow-hidden flex items-end">
+        <div className="absolute inset-0">
           <Image
-            src="/mf-1.jpeg"
+            src="/wedding background.png"
             alt="UCLOTHIA Wedding Atelier campaign"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[center_30%]"
+            className="object-cover object-[center_top]"
           />
-        </Parallax>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/80 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent pointer-events-none" />
 
-        <div className="absolute inset-0 flex items-end">
-          <div className="w-full pb-16 md:pb-24 lg:pb-32">
-            <div className="container-luxury">
-              <Reveal
-                variant="fade-up"
-                delay={200}
-                className="max-w-2xl mx-auto"
-              >
-                <div className="bg-gradient-to-t from-black/60 via-black/25 to-transparent backdrop-blur-md border border-white/10 rounded-2xl p-8 md:p-10 lg:p-12 text-center">
-                  <div className="flex items-center justify-center gap-3 mb-6">
-                    <Reveal variant="line" className="h-px w-8 bg-[var(--color-accent)]" />
-                    <p className="text-[0.75rem] uppercase tracking-[0.25em] font-medium text-white/70">
-                      Weddings
-                    </p>
-                  </div>
-                  <Reveal variant="mask" delay={100}>
-                    <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.05] tracking-[-0.02em] mb-8">
-                      The Wedding Atelier
-                    </h2>
-                  </Reveal>
-
-                  <Link
-                    href="/weddings"
-                    className="inline-flex items-center justify-center gap-3 group text-[0.75rem] font-medium tracking-[0.25em] uppercase text-white/90 hover:text-white transition-colors duration-[var(--duration-medium)]"
-                  >
-                    <span className="h-px w-10 bg-white/40 transition-all duration-[var(--duration-medium)] group-hover:w-16 group-hover:bg-white" />
-                    Discover Weddings
-                    <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1.5">→</span>
-                  </Link>
+        <div className="relative z-10 w-full pb-16 md:pb-24 lg:pb-28">
+          <div className="container-luxury">
+            <Reveal
+              variant="fade-up"
+              delay={200}
+              className="max-w-2xl mx-auto"
+            >
+              <div className="bg-gradient-to-t from-black/75 via-black/40 to-black/10 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/50 rounded-2xl p-8 md:p-12 lg:p-14 text-center">
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <Reveal variant="line" className="h-px w-8 bg-[var(--color-accent)]" />
+                  <p className="text-[0.75rem] uppercase tracking-[0.25em] font-medium text-white/75">
+                    Weddings
+                  </p>
                 </div>
-              </Reveal>
-            </div>
+                <Reveal variant="mask" delay={100}>
+                  <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.05] tracking-[-0.02em] mb-8">
+                    The Wedding Atelier
+                  </h2>
+                </Reveal>
+
+                <Link
+                  href="/weddings"
+                  className="inline-flex items-center justify-center gap-3 group text-[0.75rem] font-medium tracking-[0.25em] uppercase text-white/90 hover:text-white transition-all duration-500"
+                >
+                  <span className="h-px w-10 bg-white/40 transition-all duration-500 group-hover:w-16 group-hover:bg-[var(--color-accent)]" />
+                  Discover Weddings
+                  <span className="transition-transform duration-500 group-hover:translate-x-1.5">→</span>
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -393,16 +406,19 @@ export default function Home() {
                 ].map((pillar) => (
                   <div
                     key={pillar.num}
-                    className="group py-6 md:py-7 transition-colors duration-[var(--duration-medium)]"
+                    className="group py-6 md:py-7 px-4 -mx-4 rounded-xl transition-all duration-500 ease-[var(--ease-out)] hover:bg-[var(--color-surface)]/60"
                   >
                     <div className="flex items-baseline gap-6 md:gap-8">
-                      <span className="text-[0.75rem] font-medium tracking-[0.25em] text-[var(--color-accent)] shrink-0">
+                      <span className="text-[0.75rem] font-medium tracking-[0.25em] text-[var(--color-accent)] shrink-0 transition-all duration-500 group-hover:tracking-[0.3em]">
                         {pillar.num}
                       </span>
                       <div className="flex-1">
-                        <h3 className="font-display text-xl md:text-2xl font-light leading-[1.2] text-[var(--color-text)] mb-2">
-                          {pillar.title}
-                        </h3>
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className="font-display text-xl md:text-2xl font-light leading-[1.2] text-[var(--color-text)] transition-transform duration-500 group-hover:translate-x-1">
+                            {pillar.title}
+                          </h3>
+                          <span className="h-px flex-1 bg-transparent transition-all duration-500 group-hover:bg-[var(--color-accent)]/30" />
+                        </div>
                         <p className="text-[0.875rem] text-[var(--color-text-secondary)] leading-[1.7] max-w-lg">
                           {pillar.desc}
                         </p>
@@ -429,66 +445,102 @@ export default function Home() {
       <div className="h-24 md:h-32" />
 
       {/* 09 — PRIVATE CLIENT — EXCLUSIVITY */}
-      <section className="relative py-32 md:py-48 bg-[var(--color-text)] text-[var(--color-background)] overflow-hidden">
-        {/* Ambient warm glow */}
-        <div className="absolute -top-40 right-1/4 w-[40rem] h-[40rem] bg-[var(--color-accent)]/[0.04] rounded-full blur-3xl pointer-events-none" />
+      <section className="relative py-28 md:py-44 bg-[#0e0e0e] text-[var(--color-background)] overflow-hidden border-y border-white/10">
+        {/* Ambient warm breathing gold auras */}
+        <div className="absolute top-1/3 left-1/4 w-[36rem] h-[36rem] bg-[var(--color-accent)] rounded-full blur-[140px] pointer-events-none animate-aura opacity-30" />
+        <div className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-[#c49a45] rounded-full blur-[120px] pointer-events-none opacity-20" />
+
         <div className="container-luxury relative z-10">
-          <Reveal variant="fade" className="text-center mb-24 md:mb-32">
-            <p
-              className="mb-6 uppercase tracking-[0.25em] font-medium"
-              style={{ fontSize: "0.75rem", color: "var(--color-accent)" }}
-            >
-              Private Client
-            </p>
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-light tracking-[-0.02em] leading-[1.1] mb-6 max-w-2xl mx-auto">
-              A personal atelier experience,
-              <span className="block italic text-white/50">tailored entirely to you.</span>
-            </h2>
-            <Reveal variant="line" className="h-px w-16 bg-[var(--color-accent)]" />
-          </Reveal>
-
-          <Reveal
-            variant="fade-up"
-            delay={100}
-            className="max-w-2xl mx-auto mb-24 md:mb-32"
-          >
-            <div className="divide-y divide-white/10 border-t border-b border-white/10">
-              {[
-                { num: "01", title: "Private Appointments", desc: "Dedicated one-on-one sessions with our atelier team, at your convenience." },
-                { num: "02", title: "Personal Styling", desc: "Curated wardrobe consultation — from everyday elegance to occasion dressing." },
-                { num: "03", title: "Bespoke Commissions", desc: "Made-to-measure pieces crafted to your exact specifications and vision." },
-              ].map((service) => (
-                <Link
-                  key={service.title}
-                  href="/private-client"
-                  className="group block py-12 md:py-14 text-center transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] hover:bg-white/[0.02]"
-                >
-                  <h3 className="text-[0.875rem] uppercase tracking-[0.2em] text-white/80 font-medium mb-4">
-                    <span className="font-display text-[0.8125rem] tracking-[0.15em] text-white/30 mr-2">
-                      {service.num}
-                    </span>
-                    {service.title}
-                  </h3>
-                  <p className="text-[0.9375rem] text-white/60 leading-[1.7] mb-6 max-w-md mx-auto">
-                    {service.desc}
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-[0.75rem] uppercase tracking-[0.2em] text-white/60 group-hover:text-white transition-colors duration-[var(--duration-medium)]">
-                    Learn More
-                    <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1">→</span>
-                  </span>
-                </Link>
-              ))}
+          {/* Section Header */}
+          <Reveal variant="fade" className="text-center mb-16 md:mb-24">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Reveal variant="line" className="h-px w-8 bg-[var(--color-accent)]" />
+              <p className="text-[0.75rem] uppercase tracking-[0.25em] font-medium text-[var(--color-accent)]">
+                Private Client
+              </p>
             </div>
+            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-light tracking-[-0.02em] leading-[1.1] mb-6 max-w-3xl mx-auto">
+              A personal atelier experience,
+              <span className="block italic text-white/50">tailored entirely to your vision.</span>
+            </h2>
+            <p className="text-[0.9375rem] md:text-[1rem] text-white/60 font-light max-w-xl mx-auto leading-relaxed">
+              Step into our private salon suites for individualized bespoke tailoring, archival access, and dedicated one-on-one styling consultations.
+            </p>
           </Reveal>
 
+          {/* 3-Column Luxury Architecture Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-24">
+            {[
+              {
+                num: "01",
+                title: "Private Appointments",
+                desc: "Dedicated one-on-one sessions with our master couturiers and stylists in our private salon suites or your residence.",
+                tag: "In-Salon & Virtual",
+              },
+              {
+                num: "02",
+                title: "Personal Styling",
+                desc: "Complete wardrobe curation across red carpet, gala evenings, wedding party ensembles, and refined everyday luxury.",
+                tag: "Wardrobe Curation",
+              },
+              {
+                num: "03",
+                title: "Bespoke Commissions",
+                desc: "One-of-one made-to-measure couture crafted to your exact silhouette with hand-drawn embroideries and heritage silks.",
+                tag: "Custom Couture",
+              },
+            ].map((service, i) => (
+              <Reveal key={service.title} delay={i * 120} variant="fade-up">
+                <Link
+                  href="/private-client"
+                  className="group relative flex flex-col justify-between h-full p-8 md:p-10 rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-md transition-all duration-700 ease-[var(--ease-out)] hover:border-[var(--color-accent)]/60 hover:bg-white/[0.05] hover:shadow-2xl hover:shadow-black/60"
+                >
+                  <div>
+                    {/* Top indicator & tag */}
+                    <div className="flex items-center justify-between mb-8">
+                      <span className="font-display text-lg tracking-[0.2em] text-[var(--color-accent)] font-light">
+                        {service.num}
+                      </span>
+                      <span className="text-[0.6875rem] uppercase tracking-[0.2em] text-white/40 group-hover:text-white/70 transition-colors duration-500 font-medium">
+                        {service.tag}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-display text-2xl md:text-3xl text-white font-light leading-[1.15] mb-4 group-hover:text-white transition-colors duration-500">
+                      {service.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-[0.875rem] text-white/65 leading-[1.7] mb-8 font-light">
+                      {service.desc}
+                    </p>
+                  </div>
+
+                  {/* Bottom Action */}
+                  <div className="pt-6 border-t border-white/10 flex items-center justify-between">
+                    <span className="text-[0.75rem] uppercase tracking-[0.25em] text-white/70 group-hover:text-[var(--color-accent)] transition-colors duration-500 font-medium">
+                      Inquire Service
+                    </span>
+                    <span className="text-white/50 group-hover:text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-1.5">
+                      →
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Centered CTA */}
           <Reveal variant="fade" delay={200}>
-            <div className="text-center mt-20 md:mt-28">
+            <div className="text-center">
               <Link
                 href="/private-client"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/20 text-[0.75rem] font-medium tracking-[0.2em] uppercase text-white/90 hover:text-white hover:bg-white/10 hover:border-white/40 transition-all duration-[var(--duration-medium)] group"
+                className="relative inline-flex items-center gap-3 px-10 py-4.5 rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-[0.75rem] font-medium tracking-[0.25em] uppercase text-white hover:text-white hover:border-[var(--color-accent)]/80 hover:bg-white/10 transition-all duration-500 group shadow-lg shadow-black/30 overflow-hidden"
               >
-                Book an Appointment
-                <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1">→</span>
+                <span className="relative z-10">Book a Private Appointment</span>
+                <span className="relative z-10 transition-transform duration-500 group-hover:translate-x-1.5">→</span>
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
               </Link>
             </div>
           </Reveal>
@@ -505,23 +557,33 @@ export default function Home() {
               <Reveal variant="line" className="h-px w-12 bg-[var(--color-border-strong)]" />
               <p className="text-[0.75rem] uppercase tracking-[0.25em] font-medium text-[var(--color-accent)]">Visit Us</p>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-light">
+            <h2 className="font-display text-3xl md:text-5xl font-light tracking-[-0.02em]">
               Our Stores
             </h2>
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {stores.map((store, i) => (
-              <Reveal key={store.id} delay={i * 100}>
-                <Link href={`/stores/${store.slug}`} className="group block text-center py-8 md:py-10">
-                  <p className="text-micro !text-[0.75rem] mb-4">{String(i + 1).padStart(2, "0")} — India</p>
-                  <h3 className="font-display text-2xl md:text-3xl font-light mb-6">
+              <Reveal key={store.id} delay={i * 120}>
+                <Link
+                  href={`/stores/${store.slug}`}
+                  className="group block relative text-center py-10 px-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]/30 backdrop-blur-sm transition-all duration-700 ease-[var(--ease-out)] hover:border-[var(--color-accent)]/50 hover:bg-[var(--color-surface)] hover:shadow-2xl hover:shadow-black/5"
+                >
+                  <p className="text-[0.75rem] uppercase tracking-[0.25em] text-[var(--color-accent)] font-medium mb-5">
+                    {String(i + 1).padStart(2, "0")} — India
+                  </p>
+                  <h3 className="font-display text-2xl md:text-3xl font-light mb-5 text-[var(--color-text)] transition-transform duration-500 group-hover:-translate-y-0.5">
                     {store.city}
                   </h3>
-                  <p className="text-body text-[0.8125rem] mb-3 max-w-xs mx-auto">{store.address}</p>
-                  <p className="text-meta text-[var(--color-muted)] mb-6">{store.hours}</p>
-                  <span className="inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.15em] uppercase text-[var(--color-text-secondary)] group-hover:text-[var(--color-text)] transition-colors">
+                  <p className="text-[0.8125rem] text-[var(--color-text-secondary)] leading-[1.6] mb-3 max-w-xs mx-auto">
+                    {store.address}
+                  </p>
+                  <p className="text-[0.75rem] text-[var(--color-muted)] tracking-wide mb-8">
+                    {store.hours}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.2em] uppercase text-[var(--color-text-secondary)] group-hover:text-[var(--color-accent-dark)] transition-colors duration-500">
+                    <span className="h-px w-0 bg-[var(--color-accent)] transition-all duration-500 group-hover:w-6" />
                     Book Appointment
-                    <span className="transition-transform duration-[var(--duration-medium)] group-hover:translate-x-1">→</span>
+                    <span className="transition-transform duration-500 group-hover:translate-x-1.5">→</span>
                   </span>
                 </Link>
               </Reveal>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -24,32 +24,22 @@ interface HeroProps {
 
 export function Hero({
   children,
-  image,
+  image = "/og-campaign.jpg",
   images,
-  imageAlt,
+  imageAlt = "UCLOTHIA — Campaign",
   label,
   title,
   subtitle,
   ctaLabel,
   ctaHref,
-  interval = 5000,
+  interval = 5500,
 }: HeroProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const startX = useRef(0);
-  const endX = useRef(0);
-  const isDragging = useRef(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const slides: HeroImage[] =
     images && images.length > 0
       ? images
-      : image
-        ? [{ src: image, alt: imageAlt || "Hero image" }]
-        : [];
-
-  const goToSlide = (index: number) => {
-    setActiveIndex((index + slides.length) % slides.length);
-  };
+      : [{ src: image, alt: imageAlt }];
 
   useEffect(() => {
     if (slides.length <= 1) return;
@@ -59,91 +49,37 @@ export function Hero({
     return () => clearInterval(timer);
   }, [slides.length, interval]);
 
-  const onPointerDown = (e: React.PointerEvent) => {
-    startX.current = e.clientX;
-    endX.current = e.clientX;
-    isDragging.current = true;
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!isDragging.current) return;
-    endX.current = e.clientX;
-  };
-
-  const onPointerUp = () => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    const diff = startX.current - endX.current;
-    if (Math.abs(diff) < 50) return;
-    if (diff > 0) {
-      goToSlide(activeIndex + 1);
-    } else {
-      goToSlide(activeIndex - 1);
-    }
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowLeft") goToSlide(activeIndex - 1);
-    if (e.key === "ArrowRight") goToSlide(activeIndex + 1);
-  };
-
   return (
-    <section
-      ref={ref}
-      className="relative h-[90vh] md:h-screen w-full overflow-hidden cursor-grab active:cursor-grabbing"
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerLeave={onPointerUp}
-      onKeyDown={onKeyDown}
-      tabIndex={0}
-    >
+    <section className="relative h-[90vh] md:h-screen w-full overflow-hidden">
       <div className="absolute inset-0">
-        {slides.map((slide, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 transition-opacity duration-[600ms] ease-[var(--ease-out)] ${
-              i === activeIndex ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={slide.src}
-              alt={slide.alt}
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-        ))}
+        {slides.map((slide, i) => {
+          const isActive = i === activeIndex;
+          return (
+            <div
+              key={slide.src}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                isActive ? "opacity-100 z-[1]" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <div className="relative w-full h-full hero-breathe">
+                <Image
+                  src={slide.src}
+                  alt={slide.alt}
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/60" />
-      <div className="absolute inset-0 bg-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/60 z-[2] pointer-events-none" />
+      <div className="absolute inset-0 bg-black/10 z-[2] pointer-events-none" />
 
-      {/* Slider dots */}
-      {slides.length > 1 && (
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-10">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goToSlide(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-[2px] rounded-full transition-all duration-[var(--duration-slow)] ease-[var(--ease-out)] ${
-                i === activeIndex
-                  ? "w-10 bg-white/90"
-                  : "w-4 bg-white/25 hover:bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
-      )}
-
-      <div
-        className={`relative h-full flex flex-col items-center justify-center text-center transition-opacity duration-[800ms] ease-[var(--ease-out)] ${
-          activeIndex === 0 ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-      >
+      <div className="relative h-full flex flex-col items-center justify-center text-center z-[3]">
         <div className="container-luxury">
           {label && (
             <div className="overflow-hidden mb-5 md:mb-6">

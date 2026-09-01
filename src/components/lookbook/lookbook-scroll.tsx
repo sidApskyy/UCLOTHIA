@@ -418,7 +418,7 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
 
   return (
     <div
-      className="relative overflow-hidden rounded-3xl mb-24 md:mb-40"
+      className="relative overflow-hidden rounded-3xl"
       role="region"
       aria-label="Lookbook carousel"
       onKeyDown={onKeyDown}
