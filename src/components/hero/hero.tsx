@@ -50,7 +50,7 @@ export function Hero({
   }, [slides.length, interval]);
 
   return (
-    <section className="relative h-[100dvh] md:h-screen w-full overflow-hidden">
+    <section className="relative hero-height md:h-screen w-full overflow-hidden">
       <div className="absolute inset-0">
         {slides.map((slide, i) => {
           const isActive = i === activeIndex;
@@ -68,7 +68,7 @@ export function Hero({
                   fill
                   priority={i === 0}
                   sizes="100vw"
-                  className="object-cover object-[center_25%] md:object-center"
+                  className="object-cover hero-image object-[center_25%] md:object-center"
                 />
               </div>
             </div>

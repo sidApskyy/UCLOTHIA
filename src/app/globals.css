@@ -553,6 +553,23 @@ select.appearance-none {
   .object-cover {
     object-position: center;
   }
+  .hero-image {
+    object-position: center 25% !important;
+  }
+}
+
+/* — Hero section: full viewport with legacy-browser fallback — */
+.hero-height {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 520px;
+}
+
+@media (min-width: 768px) {
+  .hero-height {
+    height: 100vh;
+    min-height: 0;
+  }
 }
 
 /* — Focus-visible ring — */
