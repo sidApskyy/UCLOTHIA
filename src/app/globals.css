@@ -243,10 +243,16 @@ body {
   width: 100%;
   max-width: var(--container-full);
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
 }
 
 @media (min-width: 768px) {
+  .container-luxury {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .container-luxury {
     padding-inline: 3rem;
   }
@@ -540,6 +546,13 @@ select.appearance-none {
 .btn-secondary:hover {
   border-color: var(--color-text);
   background: var(--color-surface-alt);
+}
+
+/* — Mobile: keep all cover images centered so subjects don't get cropped on narrow viewports — */
+@media (max-width: 767px) {
+  .object-cover {
+    object-position: center;
+  }
 }
 
 /* — Focus-visible ring — */

@@ -59,7 +59,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         style={{ transitionTimingFunction: "var(--ease-out)" }}
       >
         <div className="flex items-center justify-between h-16 px-5 border-b border-[var(--color-border)]">
-          <Image src="/logo.png" alt="UCLOTHIA" width={100} height={40} className="h-10 w-auto brightness-0" />
+          <Image src="/logo.png" alt="UCLOTHIA" width={100} height={40} style={{ width: "auto" }} className="h-10 brightness-0" />
           <button
             onClick={onClose}
             className="p-2.5 -mr-2.5 text-[var(--color-text)] hover:text-[var(--color-muted)] transition-colors"

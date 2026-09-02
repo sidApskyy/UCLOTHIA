@@ -50,7 +50,7 @@ export function Hero({
   }, [slides.length, interval]);
 
   return (
-    <section className="relative h-[90vh] md:h-screen w-full overflow-hidden">
+    <section className="relative h-[100dvh] md:h-screen w-full overflow-hidden">
       <div className="absolute inset-0">
         {slides.map((slide, i) => {
           const isActive = i === activeIndex;
@@ -68,7 +68,7 @@ export function Hero({
                   fill
                   priority={i === 0}
                   sizes="100vw"
-                  className="object-cover"
+                  className="object-cover object-[center_25%] md:object-center"
                 />
               </div>
             </div>
@@ -89,7 +89,7 @@ export function Hero({
             </div>
           )}
           <div className="overflow-hidden">
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white font-light leading-[1.05] tracking-[-0.02em] break-words text-balance animate-[fade-in-up_1000ms_cubic-bezier(0.16,1,0.3,1)_150ms_forwards]">
+            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-light leading-[1.1] tracking-[-0.02em] break-words text-balance animate-[fade-in-up_1000ms_cubic-bezier(0.16,1,0.3,1)_150ms_forwards]">
               {title}
             </h1>
           </div>

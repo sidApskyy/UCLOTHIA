@@ -158,7 +158,8 @@ export function Header() {
                 alt="UCLOTHIA"
                 width={120}
                 height={48}
-                className={`${logoHeight} w-auto transition-all duration-[var(--duration-medium)] ${logoFilter}`}
+                style={{ width: "auto" }}
+                className={`${logoHeight} transition-all duration-[var(--duration-medium)] ${logoFilter}`}
                 priority
               />
             </Link>
