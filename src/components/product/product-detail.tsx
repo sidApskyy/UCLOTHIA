@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import type { Product, ProductVariant } from "@/lib/types";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/lib/stores/cart-store";
 import { useWishlistStore } from "@/lib/stores/wishlist-store";
 import { SizeGuideModal } from "@/components/product/size-guide-modal";
+import { flyToCart } from "@/components/product/fly-to-cart";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 
 export function ProductDetail({ product }: { product: Product }) {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -16,6 +18,9 @@ export function ProductDetail({ product }: { product: Product }) {
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [notifyEmail, setNotifyEmail] = useState("");
   const [notifySent, setNotifySent] = useState(false);
+  const [stickyBarVisible, setStickyBarVisible] = useState(false);
+  const mainImageRef = useRef<HTMLDivElement>(null);
+  const addToCartRef = useRef<HTMLButtonElement>(null);
 
   const addItem = useCartStore((s) => s.addItem);
   const wishlistToggle = useWishlistStore((s) => s.toggle);
@@ -32,6 +37,10 @@ export function ProductDetail({ product }: { product: Product }) {
       color: selectedVariant.color,
       quantity,
     });
+    if (mainImageRef.current) {
+      const imgEl = mainImageRef.current.querySelector("img") as HTMLElement;
+      if (imgEl) flyToCart(imgEl, product.images[0].src);
+    }
   };
 
   const uniqueColors = Array.from(
@@ -41,9 +50,27 @@ export function ProductDetail({ product }: { product: Product }) {
     ? product.variants.filter((v) => v.color === selectedVariant.color)
     : product.variants;
 
+  useEffect(() => {
+    const onScroll = () => {
+      setStickyBarVisible(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="pt-12 md:pt-16 pb-20 md:pb-0">
       <div className="container-luxury">
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: product.gender === "women" ? "Women" : "Men", href: product.gender === "women" ? "/women" : "/men" },
+            { label: product.name },
+          ]}
+          className="mb-8"
+        />
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-24">
           {/* Gallery */}
           <div className="flex flex-col-reverse md:flex-row gap-4">
@@ -73,7 +100,7 @@ export function ProductDetail({ product }: { product: Product }) {
             )}
 
             {/* Main image */}
-            <div className="flex-1 relative aspect-[4/5] overflow-hidden bg-[var(--color-surface-alt)]">
+            <div ref={mainImageRef} className="flex-1 relative aspect-[4/5] overflow-hidden bg-[var(--color-surface-alt)]">
               <Image
                 src={product.images[selectedImage].src}
                 alt={product.images[selectedImage].alt}
@@ -181,6 +208,9 @@ export function ProductDetail({ product }: { product: Product }) {
                       <div className="flex gap-3">
                         <input
                           type="email"
+                          id="notify-email"
+                          name="email"
+                          autoComplete="email"
                           required
                           value={notifyEmail}
                           onChange={(e) => setNotifyEmail(e.target.value)}
@@ -223,6 +253,7 @@ export function ProductDetail({ product }: { product: Product }) {
             {/* Actions */}
             <div className="flex gap-3 mb-10">
               <button
+                ref={addToCartRef}
                 onClick={handleAddToCart}
                 disabled={!selectedVariant}
                 className={`btn-primary flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-text)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)] ${
@@ -290,7 +321,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 </svg>
               </button>
               {showDetails && (
-                <dl className="space-y-5 py-4 text-[0.875rem]">
+                <dl className="space-y-5 py-4 text-[0.875rem] overflow-hidden transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)]">
                   <div>
                     <dt className="text-eyebrow mb-1">Material</dt>
                     <dd className="text-[var(--color-text-secondary)]">{product.material}</dd>
@@ -321,7 +352,10 @@ export function ProductDetail({ product }: { product: Product }) {
       />
 
       {/* Sticky mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-surface)] border-t border-[var(--color-border)] p-4 md:hidden" style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}>
+      <div
+        className={`sticky-cart-bar ${stickyBarVisible ? "is-visible" : ""}`}
+        style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+      >
         <div className="flex items-center gap-3">
           <div className="flex-1 min-w-0">
             <p className="text-[0.625rem] tracking-[0.1em] uppercase text-[var(--color-muted)] truncate">{product.name}</p>

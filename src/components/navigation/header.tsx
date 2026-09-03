@@ -89,7 +89,7 @@ export function Header() {
     : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)]";
   const hamburgerColor = isTransparent ? "bg-white" : "bg-[var(--color-text)]";
   const logoFilter = isTransparent ? "brightness-0 invert" : "brightness-0";
-  const logoHeight = scrolled ? "h-14 md:h-16" : "h-20 md:h-24";
+  const logoHeightClass = scrolled ? "h-14 md:h-16" : "h-20 md:h-24";
 
   return (
     <>
@@ -150,16 +150,15 @@ export function Header() {
             {/* Logo — center */}
             <Link
               href="/"
-              className="absolute left-1/2 -translate-x-1/2 z-10"
+              className={`absolute left-1/2 -translate-x-1/2 z-10 ${logoHeightClass} aspect-[576/433] transition-all duration-[var(--duration-medium)]`}
               aria-label="UCLOTHIA — Home"
             >
               <Image
                 src="/logo.png"
                 alt="UCLOTHIA"
-                width={120}
-                height={48}
-                style={{ width: "auto" }}
-                className={`${logoHeight} transition-all duration-[var(--duration-medium)] ${logoFilter}`}
+                fill
+                sizes="120px"
+                className={`object-contain ${logoFilter}`}
                 priority
               />
             </Link>
@@ -205,6 +204,8 @@ export function Header() {
               </Link>
               <button
                 onClick={openCart}
+                data-cart-icon
+                style={{ transition: "transform 200ms cubic-bezier(0.22, 1, 0.36, 1)" }}
                 className={`relative p-2 -m-2 ${iconColor} transition-colors`}
                 aria-label="Shopping bag"
               >

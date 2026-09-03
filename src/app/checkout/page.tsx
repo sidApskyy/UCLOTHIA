@@ -132,6 +132,7 @@ export default function CheckoutPage() {
                   <input
                     type="radio"
                     name="checkout-mode"
+                    autoComplete="off"
                     checked={isGuest}
                     onChange={() => setIsGuest(true)}
                     className="accent-[var(--color-text)]"
@@ -142,6 +143,7 @@ export default function CheckoutPage() {
                   <input
                     type="radio"
                     name="checkout-mode"
+                    autoComplete="off"
                     onChange={() => setIsGuest(false)}
                     className="accent-[var(--color-text)]"
                   />
@@ -211,15 +213,15 @@ export default function CheckoutPage() {
               </h2>
               <div className="space-y-3">
                 <label className="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="payment" defaultChecked className="accent-[var(--color-text)]" />
+                  <input type="radio" name="payment" autoComplete="off" defaultChecked className="accent-[var(--color-text)]" />
                   <span className="text-[0.875rem]">Bank Transfer (NEFT / IMPS)</span>
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="payment" className="accent-[var(--color-text)]" />
+                  <input type="radio" name="payment" autoComplete="off" className="accent-[var(--color-text)]" />
                   <span className="text-[0.875rem]">Credit / Debit Card</span>
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="payment" className="accent-[var(--color-text)]" />
+                  <input type="radio" name="payment" autoComplete="off" className="accent-[var(--color-text)]" />
                   <span className="text-[0.875rem]">UPI</span>
                 </label>
               </div>
@@ -264,7 +266,9 @@ export default function CheckoutPage() {
               <div className="flex gap-3">
                 <input
                   id="checkout-coupon"
+                  name="coupon"
                   type="text"
+                  autoComplete="off"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
                   placeholder="Enter code"

@@ -138,12 +138,54 @@ export function Footer() {
         </div>
       </div>
 
+      {/* Trust signals */}
+      <div className="border-t border-white/10">
+        <div className="container-luxury py-10 md:py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {[
+              { icon: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10", label: "White-Glove Delivery", sub: "Worldwide shipping" },
+              { icon: "M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z M19 10v2a7 7 0 0 1-14 0v-2 M12 19v4 M8 23h8", label: "Secure Payments", sub: "Encrypted checkout" },
+              { icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z", label: "Handcrafted", sub: "By master artisans" },
+              { icon: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5 M12 7v5l3 3", label: "7-Day Returns", sub: "On ready-to-ship" },
+            ].map((item) => (
+              <div key={item.label} className="flex items-center gap-3 md:gap-4">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  className="text-[var(--color-accent)] shrink-0"
+                >
+                  <path d={item.icon} />
+                </svg>
+                <div>
+                  <p className="text-[0.75rem] font-medium tracking-[0.05em] text-white/90">{item.label}</p>
+                  <p className="text-[0.625rem] tracking-[0.1em] uppercase text-white/40 mt-0.5">{item.sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="container-luxury py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="text-[0.75rem] text-white/60 tracking-[0.05em]">
             © {new Date().getFullYear()} UCLOTHIA. All rights reserved.
           </span>
+          <div className="flex items-center gap-4">
+            <span className="text-[0.625rem] uppercase tracking-[0.15em] text-white/30">We Accept</span>
+            <div className="flex items-center gap-3">
+              {["VISA", "MC", "AMEX", "UPI"].map((p) => (
+                <span key={p} className="text-[0.625rem] font-medium tracking-[0.1em] text-white/50 border border-white/15 px-2 py-1 rounded">
+                  {p}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </footer>

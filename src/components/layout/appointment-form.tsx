@@ -60,6 +60,7 @@ export function AppointmentForm() {
             name="name"
             type="text"
             required
+            autoComplete="name"
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "appt-name-error" : undefined}
             className="w-full border-b border-[var(--color-border)] py-3 bg-transparent focus:border-[var(--color-text)] outline-none transition-colors text-[0.9375rem] focus-visible:border-[var(--color-text)]"
@@ -75,6 +76,7 @@ export function AppointmentForm() {
             name="email"
             type="email"
             required
+            autoComplete="email"
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "appt-email-error" : undefined}
             className="w-full border-b border-[var(--color-border)] py-3 bg-transparent focus:border-[var(--color-text)] outline-none transition-colors text-[0.9375rem]"
@@ -89,6 +91,7 @@ export function AppointmentForm() {
             id="appt-phone"
             name="phone"
             type="tel"
+            autoComplete="tel"
             className="w-full border-b border-[var(--color-border)] py-3 bg-transparent focus:border-[var(--color-text)] outline-none transition-colors text-[0.9375rem]"
           />
         </div>
@@ -98,6 +101,7 @@ export function AppointmentForm() {
             id="appt-store"
             name="store"
             required
+            autoComplete="off"
             aria-invalid={!!errors.store}
             aria-describedby={errors.store ? "appt-store-error" : undefined}
             className="w-full border-b border-[var(--color-border)] py-3 bg-transparent focus:border-[var(--color-text)] outline-none transition-colors text-[0.9375rem] appearance-none cursor-pointer"
@@ -119,6 +123,7 @@ export function AppointmentForm() {
           id="appt-service"
           name="service"
           required
+          autoComplete="off"
           aria-invalid={!!errors.service}
           aria-describedby={errors.service ? "appt-service-error" : undefined}
           className="w-full border-b border-[var(--color-border)] py-3 bg-transparent focus:border-[var(--color-text)] outline-none transition-colors text-[0.9375rem] appearance-none cursor-pointer"
@@ -141,6 +146,7 @@ export function AppointmentForm() {
           id="appt-message"
           name="message"
           rows={4}
+          autoComplete="off"
           className="w-full border-b border-[var(--color-border)] py-3 bg-transparent focus:border-[var(--color-text)] outline-none transition-colors text-[0.9375rem] resize-none"
         />
       </div>

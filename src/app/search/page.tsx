@@ -44,6 +44,9 @@ function SearchContent() {
         <div className="max-w-xl mx-auto relative">
           <input
             type="search"
+            id="search-input"
+            name="q"
+            autoComplete="off"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search products, collections, categories..."

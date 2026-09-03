@@ -6,18 +6,22 @@ import { Footer } from "@/components/navigation/footer";
 import { CartDrawer } from "@/components/commerce/cart-drawer";
 import { CartToast } from "@/components/commerce/cart-toast";
 import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
+import { CursorFollower } from "@/components/motion/cursor-follower";
+import { ScrollToTop } from "@/components/motion/scroll-to-top";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
+  preload: false,
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -105,6 +109,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Footer />
           <CartDrawer />
           <CartToast />
+          <CursorFollower />
+          <ScrollToTop />
         </SmoothScrollProvider>
       </body>
     </html>

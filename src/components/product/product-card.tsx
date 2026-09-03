@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import type { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/utils";
 import { useWishlistStore } from "@/lib/stores/wishlist-store";
+import { flyToCart } from "@/components/product/fly-to-cart";
 
 interface ProductCardProps {
   product: Product;
@@ -14,20 +15,36 @@ interface ProductCardProps {
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const [hovered, setHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const wishlistToggle = useWishlistStore((s) => s.toggle);
   const inWishlist = useWishlistStore((s) => s.has(product.id));
 
   const primaryImage = product.images.find((i) => i.type === "front") || product.images[0];
   const hoverImage = product.images.find((i) => i.type === "back") || product.images.find((i) => i.type === "editorial");
 
+  const handleQuickAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (cardRef.current) {
+      const imgEl = cardRef.current.querySelector("img") as HTMLElement;
+      if (imgEl) flyToCart(imgEl, primaryImage.src);
+    }
+  };
+
   return (
     <div
-      className="group"
+      ref={cardRef}
+      className="group stagger-item"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <Link href={`/products/${product.slug}`} className="block">
         <div className="relative aspect-[4/5] overflow-hidden bg-[var(--color-surface-alt)]">
+          {/* Skeleton */}
+          {!imageLoaded && (
+            <div className="absolute inset-0 product-skeleton" />
+          )}
           {/* Primary image */}
           <Image
             src={primaryImage.src}
@@ -40,8 +57,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                 : hovered
                   ? "scale-110"
                   : "opacity-100 scale-100"
-            }`}
+            } ${imageLoaded ? "" : "opacity-0"}`}
             priority={priority}
+            onLoad={() => setImageLoaded(true)}
           />
           {/* Hover image — crossfade with zoom */}
           {hoverImage && (
@@ -96,15 +114,22 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             </svg>
           </button>
 
-          {/* Quick view bar — slides up from bottom on hover (desktop) */}
+          {/* Quick action bar — slides up from bottom on hover (desktop) */}
           <div
-            className={`absolute bottom-0 left-0 right-0 bg-[var(--color-surface)]/95 backdrop-blur-md py-3.5 text-center transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] hidden md:block z-10 ${
+            className={`absolute bottom-0 left-0 right-0 bg-[var(--color-surface)]/95 backdrop-blur-md py-3.5 transition-all duration-[var(--duration-medium)] ease-[var(--ease-out)] hidden md:flex z-10 items-center justify-center gap-6 ${
               hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
             }`}
           >
             <span className="text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-[var(--color-text)]">
               View Details
             </span>
+            <span className="h-4 w-px bg-[var(--color-border)]" />
+            <button
+              onClick={handleQuickAdd}
+              className="text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors"
+            >
+              Quick Add
+            </button>
           </div>
         </div>
 

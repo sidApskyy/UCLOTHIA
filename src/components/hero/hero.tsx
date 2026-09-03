@@ -50,25 +50,28 @@ export function Hero({
   }, [slides.length, interval]);
 
   return (
-    <section className="relative hero-height md:h-screen w-full overflow-hidden">
-      <div className="absolute inset-0">
+    <section className="relative w-full md:h-screen overflow-hidden">
+      <div className="md:absolute md:inset-0">
         {slides.map((slide, i) => {
           const isActive = i === activeIndex;
           return (
             <div
               key={slide.src}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              className={`transition-opacity duration-1000 ease-in-out ${
+                i === 0 ? "relative md:absolute md:inset-0" : "absolute inset-0 md:absolute md:inset-0"
+              } ${
                 isActive ? "opacity-100 z-[1]" : "opacity-0 z-0 pointer-events-none"
               }`}
             >
-              <div className="relative w-full h-full hero-breathe">
+              <div className="w-full md:h-full hero-breathe ken-burns-intro">
                 <Image
                   src={slide.src}
                   alt={slide.alt}
-                  fill
+                  width={1537}
+                  height={1023}
                   priority={i === 0}
                   sizes="100vw"
-                  className="object-cover hero-image object-[center_25%] md:object-center"
+                  className="w-full h-auto md:h-full md:w-full md:object-cover hero-image md:object-center"
                 />
               </div>
             </div>
@@ -79,7 +82,7 @@ export function Hero({
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/60 z-[2] pointer-events-none" />
       <div className="absolute inset-0 bg-black/10 z-[2] pointer-events-none" />
 
-      <div className="relative h-full flex flex-col items-center justify-center text-center z-[3]">
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-[3]">
         <div className="container-luxury">
           {label && (
             <div className="overflow-hidden mb-5 md:mb-6">

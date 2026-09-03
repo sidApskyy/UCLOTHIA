@@ -28,7 +28,9 @@ export function NewsletterForm() {
       >
         <input
           type="email"
+          id="newsletter-email"
           name="email"
+          autoComplete="email"
           placeholder="Your email address"
           className="flex-1 bg-transparent border-b border-white/30 py-3 text-[0.9375rem] text-white placeholder:text-white/40 focus:border-white/60 outline-none transition-colors"
           aria-label="Email address"

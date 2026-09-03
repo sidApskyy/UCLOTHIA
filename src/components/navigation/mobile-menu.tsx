@@ -59,7 +59,9 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         style={{ transitionTimingFunction: "var(--ease-out)" }}
       >
         <div className="flex items-center justify-between h-16 px-5 border-b border-[var(--color-border)]">
-          <Image src="/logo.png" alt="UCLOTHIA" width={100} height={40} style={{ width: "auto" }} className="h-10 brightness-0" />
+          <Link href="/" aria-label="UCLOTHIA — Home" className="relative h-10 aspect-[576/433]">
+            <Image src="/logo.png" alt="UCLOTHIA" fill sizes="100px" className="object-contain brightness-0" />
+          </Link>
           <button
             onClick={onClose}
             className="p-2.5 -mr-2.5 text-[var(--color-text)] hover:text-[var(--color-muted)] transition-colors"
@@ -76,6 +78,9 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             <div className="relative">
               <input
                 type="search"
+                id="mobile-search-input"
+                name="q"
+                autoComplete="off"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search..."

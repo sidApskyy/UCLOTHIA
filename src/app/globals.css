@@ -554,23 +554,11 @@ select.appearance-none {
     object-position: center;
   }
   .hero-image {
-    object-position: center 25% !important;
+    object-position: center center !important;
   }
 }
 
-/* — Hero section: full viewport with legacy-browser fallback — */
-.hero-height {
-  height: 100vh;
-  height: 100dvh;
-  min-height: 520px;
-}
-
-@media (min-width: 768px) {
-  .hero-height {
-    height: 100vh;
-    min-height: 0;
-  }
-}
+/* — Hero section height: no longer needed, handled by spacer div in component — */
 
 /* — Focus-visible ring — */
 *:focus-visible {
@@ -685,6 +673,17 @@ select.appearance-none {
   }
 }
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes scrollIndicator {
   0% {
     transform: translateY(0);
@@ -699,6 +698,52 @@ select.appearance-none {
   100% {
     transform: translateY(12px);
     opacity: 0;
+  }
+}
+
+/* — Luxury gold line expand from center — */
+@keyframes goldLineExpand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* — Luxury text shimmer sweep — */
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* — Decorative diamond pulse — */
+@keyframes diamondPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: rotate(45deg) scale(1.15);
+  }
+}
+
+/* — Luxury fade in up with blur — */
+@keyframes luxuryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
   }
 }
 
@@ -882,4 +927,261 @@ select.appearance-none {
 
 .horizontal-scroll::-webkit-scrollbar {
   display: none;
+}
+
+/* ============================================
+   KEN BURNS CINEMATIC INTRO
+   ============================================ */
+
+@keyframes kenBurnsIntro {
+  0% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ken-burns-intro {
+  animation: kenBurnsIntro 3000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================
+   IMAGE MASK REVEAL (clip-path sweep)
+   ============================================ */
+
+.reveal-mask-sweep {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path;
+}
+
+.reveal-mask-sweep.is-visible {
+  clip-path: inset(0 0 0 0);
+}
+
+.reveal-mask-sweep-up {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path;
+}
+
+.reveal-mask-sweep-up.is-visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ============================================
+   STAGGERED GRID ENTRANCE
+   ============================================ */
+
+.stagger-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.stagger-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   LINE DRAW ON SCROLL
+   ============================================ */
+
+.line-draw {
+  width: 0;
+  transition: width 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: width;
+}
+
+.line-draw.is-visible {
+  width: var(--line-draw-width, 4rem);
+}
+
+/* ============================================
+   NUMBER COUNTER
+   ============================================ */
+
+.counter-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   CUSTOM CURSOR FOLLOWER
+   ============================================ */
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--color-text);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 250ms var(--ease-out), height 250ms var(--ease-out), opacity 250ms var(--ease-out);
+  mix-blend-mode: difference;
+}
+
+.cursor-dot.cursor-hover {
+  width: 36px;
+  height: 36px;
+  opacity: 0.5;
+}
+
+@media (hover: none), (max-width: 767px) {
+  .cursor-dot {
+    display: none;
+  }
+}
+
+/* ============================================
+   SCROLL TO TOP BUTTON
+   ============================================ */
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 50;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out), border-color 300ms var(--ease-out);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.scroll-top-btn.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top-btn:hover {
+  border-color: var(--color-text);
+}
+
+/* ============================================
+   PAGE TRANSITION WIPE
+   ============================================ */
+
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  background: var(--color-text);
+  z-index: 9998;
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+.page-wipe.wipe-out {
+  animation: pageWipeOut 600ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.page-wipe.wipe-in {
+  animation: pageWipeIn 600ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes pageWipeOut {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes pageWipeIn {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+/* ============================================
+   FLY TO CART ANIMATION
+   ============================================ */
+
+.fly-to-cart {
+  position: fixed;
+  z-index: 9997;
+  pointer-events: none;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  transition: all 700ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ============================================
+   STICKY MOBILE ADD-TO-CART BAR
+   ============================================ */
+
+.sticky-cart-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transform: translateY(100%);
+  transition: transform 400ms var(--ease-out);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.sticky-cart-bar.is-visible {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .sticky-cart-bar {
+    display: none;
+  }
+}
+
+/* ============================================
+   SKELETON SHIMMER FOR PRODUCT IMAGES
+   ============================================ */
+
+.product-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-alt) 25%,
+    var(--color-border) 50%,
+    var(--color-surface-alt) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s var(--ease-in-out) infinite;
+}
+
+/* ============================================
+   BREADCRUMB
+   ============================================ */
+
+.breadcrumb-link {
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  transition: color 200ms var(--ease-out);
+}
+
+.breadcrumb-link:hover {
+  color: var(--color-text);
+}
+
+.breadcrumb-separator {
+  color: var(--color-border-strong);
+  font-size: 0.625rem;
 }

@@ -7,7 +7,7 @@ interface RevealProps {
   className?: string;
   delay?: number;
   as?: "div" | "section" | "article" | "li" | "span" | "p" | "h1" | "h2" | "h3";
-  variant?: "fade-up" | "fade" | "clip" | "mask" | "line" | "image";
+  variant?: "fade-up" | "fade" | "clip" | "mask" | "line" | "image" | "mask-sweep" | "mask-sweep-up";
 }
 
 export function Reveal({
@@ -57,6 +57,8 @@ export function Reveal({
     mask: "reveal-mask",
     line: "reveal-line",
     image: "reveal-image",
+    "mask-sweep": "reveal-mask-sweep",
+    "mask-sweep-up": "reveal-mask-sweep-up",
   }[variant];
 
   return (
