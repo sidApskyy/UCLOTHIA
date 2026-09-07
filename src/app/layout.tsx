@@ -6,8 +6,8 @@ import { Footer } from "@/components/navigation/footer";
 import { CartDrawer } from "@/components/commerce/cart-drawer";
 import { CartToast } from "@/components/commerce/cart-toast";
 import { SmoothScrollProvider } from "@/components/motion/smooth-scroll-provider";
-import { CursorFollower } from "@/components/motion/cursor-follower";
 import { ScrollToTop } from "@/components/motion/scroll-to-top";
+import { AmbientBackground } from "@/components/motion/ambient-background";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -104,12 +104,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SmoothScrollProvider>
+          <AmbientBackground />
           <Header />
-          <main id="main-content" className="animate-page-in">{children}</main>
+          <main id="main-content" className="relative z-10">{children}</main>
           <Footer />
           <CartDrawer />
           <CartToast />
-          <CursorFollower />
           <ScrollToTop />
         </SmoothScrollProvider>
       </body>

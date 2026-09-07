@@ -445,32 +445,44 @@ export default function Home() {
       <div className="h-24 md:h-32" />
 
       {/* 09 — PRIVATE CLIENT — EXCLUSIVITY */}
-      <section className="relative py-36 md:py-52 lg:py-60 bg-[#0c0c0c] text-[var(--color-background)] overflow-hidden border-y border-white/10">
-        {/* Ambient warm breathing gold auras */}
-        <div className="absolute top-1/3 left-1/4 w-[42rem] h-[42rem] bg-[var(--color-accent)] rounded-full blur-[160px] pointer-events-none animate-aura opacity-25" />
-        <div className="absolute bottom-1/4 right-1/4 w-[34rem] h-[34rem] bg-[#c49a45] rounded-full blur-[140px] pointer-events-none opacity-20" />
+      <section className="relative py-32 md:py-48 bg-[#0c0c0c] text-[var(--color-background)] overflow-hidden">
+        {/* Subtle centered gold glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[30rem] bg-[var(--color-accent)] rounded-full blur-[180px] pointer-events-none opacity-[0.06]" />
+
+        {/* Giant background numeral — editorial watermark */}
+        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[20rem] md:text-[32rem] font-light text-white/[0.015] leading-none select-none pointer-events-none">
+          09
+        </span>
+
+        {/* Vertical gold hairline — center axis */}
+        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-transparent via-[var(--color-accent)]/15 to-transparent pointer-events-none" />
 
         <div className="container-luxury relative z-10">
           {/* Section Header */}
-          <Reveal variant="fade" className="text-center mb-20 md:mb-28">
-            <div className="flex items-center justify-center gap-4 mb-5">
-              <div className="h-px w-10 bg-[var(--color-accent)]" />
-              <p className="text-[0.75rem] uppercase tracking-[0.3em] font-medium text-[var(--color-accent)]">
+          <Reveal variant="fade" className="text-center mb-16 md:mb-24">
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <span className="h-px w-8 bg-[var(--color-accent)]" />
+              <p className="text-[0.6875rem] uppercase tracking-[0.35em] font-medium text-[var(--color-accent)]">
                 Private Client
               </p>
-              <div className="h-px w-10 bg-[var(--color-accent)]" />
+              <span className="h-px w-8 bg-[var(--color-accent)]" />
             </div>
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-light tracking-[-0.02em] leading-[1.1] mb-8 max-w-3xl mx-auto">
-              A personal atelier experience,
-              <span className="block italic text-white/50 mt-2">tailored entirely to your vision.</span>
+            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-light tracking-[-0.02em] leading-[1.1] mb-6 max-w-3xl mx-auto">
+              A personal atelier experience
             </h2>
-            <p className="text-[0.9375rem] md:text-[1.0625rem] text-white/60 font-light max-w-2xl mx-auto leading-relaxed">
-              Step into our private salon suites for individualized bespoke tailoring, archival access, and dedicated one-on-one styling consultations.
+            <p className="font-display text-lg md:text-xl font-light italic text-white/40 max-w-xl mx-auto leading-[1.5] mb-10">
+              Tailored entirely to your vision
             </p>
+            {/* Decorative ornament */}
+            <div className="flex items-center justify-center gap-3">
+              <span className="h-px w-6 bg-white/15" />
+              <span className="w-1.5 h-1.5 rotate-45 border border-[var(--color-accent)]/40" />
+              <span className="h-px w-6 bg-white/15" />
+            </div>
           </Reveal>
 
-          {/* 3-Column Luxury Architecture Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-20 md:mb-28 items-stretch">
+          {/* 3-Column Cards with gold hover treatment */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.06] mb-16 md:mb-20 rounded-2xl overflow-hidden border border-white/[0.06]">
             {[
               {
                 num: "01",
@@ -493,40 +505,44 @@ export default function Home() {
             ].map((service, i) => (
               <Reveal
                 key={service.title}
-                delay={i * 120}
-                variant="fade-up"
+                delay={i * 100}
+                variant="fade"
                 className="h-full"
               >
                 <Link
                   href="/private-client"
-                  className="group relative h-full min-h-[440px] grid grid-rows-[auto_1fr_auto] p-8 md:p-10 rounded-3xl border border-white/[0.12] bg-white/[0.03] backdrop-blur-md transition-all duration-700 ease-[var(--ease-out)] hover:border-[var(--color-accent)]/60 hover:bg-white/[0.06] hover:shadow-[0_24px_60px_rgba(0,0,0,0.6)] overflow-hidden"
+                  className="group relative h-full min-h-[360px] flex flex-col p-10 md:p-12 bg-[#0c0c0c] transition-all duration-500 ease-[var(--ease-out)] hover:bg-[#111111]"
                 >
-                  {/* Top hairline indicator sweep */}
-                  <span className="absolute top-0 left-0 h-[2px] w-0 bg-gradient-to-r from-[var(--color-accent)] via-[#e2c882] to-[var(--color-accent)] transition-all duration-700 ease-[var(--ease-out)] group-hover:w-full rounded-t-3xl" />
+                  {/* Gold left border — animates in on hover */}
+                  <span className="absolute left-0 top-0 bottom-0 w-px bg-[var(--color-accent)] scale-y-0 origin-top transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-y-100" />
 
-                  <div className="flex items-center justify-between gap-3 h-12">
-                    <span className="font-display text-2xl tracking-[0.15em] text-[var(--color-accent)] font-light leading-none">
-                      {service.num}
-                    </span>
-                    <span className="px-2.5 py-1 rounded-full border border-white/10 bg-white/[0.04] text-[0.55rem] uppercase tracking-[0.08em] text-white/50 group-hover:text-white/80 group-hover:border-white/20 transition-all duration-500 font-medium whitespace-nowrap">
-                      {service.tag}
-                    </span>
-                  </div>
+                  {/* Centered content block */}
+                  <div className="flex-1 flex flex-col justify-center">
+                    {/* Number + decorative underline */}
+                    <div className="mb-8">
+                      <span className="font-display text-4xl font-light text-[var(--color-accent)]/30 leading-none block mb-3 transition-colors duration-500 group-hover:text-[var(--color-accent)]/60">
+                        {service.num}
+                      </span>
+                      <span className="h-px w-8 bg-white/10 transition-all duration-500 ease-[var(--ease-out)] group-hover:w-12 group-hover:bg-[var(--color-accent)]/40" />
+                    </div>
 
-                  <div className="min-w-0 self-start">
-                    <h3 className="font-display text-2xl md:text-[1.625rem] text-white font-light leading-[1.15] mb-4 group-hover:text-white transition-colors duration-500">
+                    {/* Title */}
+                    <h3 className="font-display text-xl md:text-2xl text-white font-light leading-[1.2] mb-5">
                       {service.title}
                     </h3>
-                    <p className="text-[0.875rem] text-white/60 leading-[1.7] font-light break-words">
+
+                    {/* Description */}
+                    <p className="text-[0.875rem] text-white/50 leading-[1.7] font-light">
                       {service.desc}
                     </p>
                   </div>
 
-                  <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between gap-3">
-                    <span className="text-[0.75rem] uppercase tracking-[0.25em] text-white/70 group-hover:text-[var(--color-accent)] transition-colors duration-500 font-medium whitespace-nowrap">
-                      Inquire Service
+                  {/* Bottom — tag + arrow */}
+                  <div className="pt-8 flex items-center justify-between gap-3 border-t border-white/[0.06]">
+                    <span className="text-[0.625rem] uppercase tracking-[0.2em] text-white/30 font-medium">
+                      {service.tag}
                     </span>
-                    <span className="text-white/50 group-hover:text-[var(--color-accent)] transition-transform duration-500 group-hover:translate-x-2">
+                    <span className="text-white/30 group-hover:text-[var(--color-accent)] transition-all duration-500 group-hover:translate-x-1 text-sm">
                       →
                     </span>
                   </div>
@@ -535,33 +551,37 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Couture Assurance Notes */}
-          <Reveal variant="fade" delay={150} className="w-full mb-14 md:mb-20 text-center">
-            <div className="w-full flex flex-wrap items-center justify-center gap-y-3 gap-x-10 md:gap-x-14 text-[0.6875rem] uppercase tracking-[0.25em] text-white/40 font-medium select-none">
+          {/* Assurance Notes — with gold dot accents */}
+          <Reveal variant="fade" delay={100} className="w-full mb-14 md:mb-16 text-center">
+            <div className="flex flex-wrap items-center justify-center gap-y-4 gap-x-10 md:gap-x-14 text-[0.625rem] uppercase tracking-[0.25em] text-white/30 font-medium">
               <span className="flex items-center gap-2.5">
-                <span className="text-[var(--color-accent)] text-[0.55rem]">✦</span> Master Couturier Fitting
+                <span className="w-1 h-1 rounded-full bg-[var(--color-accent)]/50" />
+                Master Couturier Fitting
               </span>
               <span className="flex items-center gap-2.5">
-                <span className="text-[var(--color-accent)] text-[0.55rem]">✦</span> Global White-Glove Delivery
+                <span className="w-1 h-1 rounded-full bg-[var(--color-accent)]/50" />
+                Global White-Glove Delivery
               </span>
               <span className="flex items-center gap-2.5">
-                <span className="text-[var(--color-accent)] text-[0.55rem]">✦</span> Bespoke Archival Access
+                <span className="w-1 h-1 rounded-full bg-[var(--color-accent)]/50" />
+                Bespoke Archival Access
               </span>
             </div>
           </Reveal>
 
-          {/* Centered CTA */}
-          <Reveal variant="fade" delay={200}>
+          {/* Dual CTA — primary + secondary */}
+          <Reveal variant="fade" delay={150}>
             <div className="flex flex-col items-center gap-6">
-              <div className="h-px w-24 bg-white/20" />
               <Link
                 href="/private-client"
-                className="relative inline-flex items-center gap-3 px-12 py-5 rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-[0.75rem] font-medium tracking-[0.25em] uppercase text-white hover:text-white hover:border-[var(--color-accent)]/90 hover:bg-white/10 transition-all duration-500 group shadow-xl shadow-black/40 overflow-hidden"
+                className="inline-flex items-center gap-3 px-10 py-4 border border-white/20 text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-white hover:bg-white hover:text-[#0c0c0c] transition-all duration-500 group"
               >
-                <span className="relative z-10">Book a Private Appointment</span>
-                <span className="relative z-10 transition-transform duration-500 group-hover:translate-x-1.5">→</span>
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+                Book a Private Appointment
+                <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
               </Link>
+              <p className="text-[0.625rem] uppercase tracking-[0.2em] text-white/20 font-light">
+                By appointment only · Limited availability
+              </p>
             </div>
           </Reveal>
         </div>

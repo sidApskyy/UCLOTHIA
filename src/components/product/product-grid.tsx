@@ -81,12 +81,27 @@ export function ProductGrid({ products, title, eyebrow }: ProductGridProps) {
   return (
     <div className="pt-16 md:pt-24">
       {/* Header */}
-      <div className="container-luxury pb-12 md:pb-16">
-        {eyebrow && <p className="text-eyebrow-accent mb-3">{eyebrow}</p>}
-        <div className="flex items-end justify-between gap-6 flex-wrap">
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-[-0.02em]">{title}</h1>
-          <p className="text-micro pb-2">{filtered.length} {filtered.length === 1 ? "piece" : "pieces"}</p>
+      <div className="container-luxury pb-12 md:pb-16 text-center">
+        {eyebrow && (
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="h-px w-8 bg-[var(--color-accent)]" />
+            <p className="text-[0.6875rem] uppercase tracking-[0.3em] font-medium text-[var(--color-accent)]">
+              {eyebrow}
+            </p>
+            <span className="h-px w-8 bg-[var(--color-accent)]" />
+          </div>
+        )}
+        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-[-0.02em] mb-6">
+          {title}
+        </h1>
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <span className="h-px w-6 bg-[var(--color-border-strong)]" />
+          <span className="w-1 h-1 rotate-45 border border-[var(--color-accent)]/30" />
+          <span className="h-px w-6 bg-[var(--color-border-strong)]" />
         </div>
+        <p className="text-[0.6875rem] uppercase tracking-[0.2em] text-[var(--color-muted)]">
+          {filtered.length} {filtered.length === 1 ? "piece" : "pieces"}
+        </p>
       </div>
 
       {/* Controls */}

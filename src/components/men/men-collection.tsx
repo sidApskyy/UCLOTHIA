@@ -7,7 +7,7 @@ import { StaggerGroup } from "@/components/motion/stagger-group";
 import { LineDraw } from "@/components/motion/line-draw";
 import { Reveal } from "@/components/motion/reveal";
 
-interface WomenCollectionProps {
+interface MenCollectionProps {
   products: Product[];
 }
 
@@ -20,15 +20,12 @@ const sortOptions = [
 
 const filterCategories = [
   { value: "all", label: "All" },
-  { value: "sarees", label: "Sarees" },
-  { value: "lehengas", label: "Lehengas" },
-  { value: "gowns", label: "Gowns" },
-  { value: "suits", label: "Suits & Sets" },
-  { value: "kurtas", label: "Kurtas" },
-  { value: "jewellery", label: "Jewellery" },
+  { value: "sherwanis", label: "Sherwanis" },
+  { value: "bandhgalas", label: "Bandhgalas" },
+  { value: "kurta-sets", label: "Kurta Sets" },
 ];
 
-export function WomenCollection({ products }: WomenCollectionProps) {
+export function MenCollection({ products }: MenCollectionProps) {
   const [sortBy, setSortBy] = useState("featured");
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
@@ -99,10 +96,6 @@ export function WomenCollection({ products }: WomenCollectionProps) {
     setActiveCategory(cat);
     setSelectedSizes([]);
     setSelectedColors([]);
-  };
-
-  const scrollToGrid = () => {
-    gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
@@ -177,7 +170,7 @@ export function WomenCollection({ products }: WomenCollectionProps) {
               className="text-center text-[0.875rem] md:text-[1rem] text-[var(--color-text-secondary)] font-light leading-[1.7] max-w-lg mx-auto mb-10"
               style={{ animation: "luxuryFadeIn 800ms cubic-bezier(0.16,1,0.3,1) 500ms both" }}
             >
-              Explore every piece — from handwoven sarees to architectural gowns, each crafted by master artisans.
+              Explore every piece — from hand-embroidered sherwanis to tailored bandhgalas, each crafted by master artisans.
             </p>
           </Reveal>
 
@@ -249,7 +242,7 @@ export function WomenCollection({ products }: WomenCollectionProps) {
                       : "border border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:bg-[var(--color-surface-alt)]"
                   }`}
                   aria-expanded={showFilters}
-                  aria-controls="filter-panel-women"
+                  aria-controls="filter-panel-men"
                 >
                   <svg className={`transition-colors duration-300 ${showFilters ? "text-[var(--color-accent)]" : "text-[var(--color-muted)] group-hover:text-[var(--color-text)]"}`} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
                     <path d="M4 6h16M7 12h10M10 18h4" />
@@ -269,7 +262,7 @@ export function WomenCollection({ products }: WomenCollectionProps) {
                   <span className="font-display text-[1rem] font-semibold text-[var(--color-text)] hidden lg:inline">Sort by</span>
                   <div className="relative">
                     <select
-                      id="sort-select-women"
+                      id="sort-select-men"
                       name="sort"
                       autoComplete="off"
                       value={sortBy}
@@ -292,7 +285,7 @@ export function WomenCollection({ products }: WomenCollectionProps) {
 
             {/* Filter panel — inside the card */}
             {showFilters && (
-              <div id="filter-panel-women" className="px-6 md:px-8 pb-6 pt-1 border-t border-[var(--color-border)] animate-[fade-in_400ms_var(--ease-out)_forwards]">
+              <div id="filter-panel-men" className="px-6 md:px-8 pb-6 pt-1 border-t border-[var(--color-border)] animate-[fade-in_400ms_var(--ease-out)_forwards]">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-6">
                   {/* Size */}
                   <div>
@@ -375,7 +368,6 @@ export function WomenCollection({ products }: WomenCollectionProps) {
               onClick={() => {
                 setSelectedSizes([]);
                 setSelectedColors([]);
-                setActiveCategory("all");
               }}
               className="text-[0.75rem] tracking-[0.15em] uppercase text-[var(--color-text)] border-b border-[var(--color-text)] pb-1 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
             >

@@ -4,30 +4,54 @@ import { NewsletterForm } from "@/components/layout/newsletter-form";
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--color-text)] text-[var(--color-background)]">
+    <footer className="relative bg-[#0a0a0a] text-[var(--color-background)] overflow-hidden">
+      {/* Subtle gold glow at top */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60rem] h-[20rem] bg-[var(--color-accent)] rounded-full blur-[200px] pointer-events-none opacity-[0.04]" />
+
       {/* Large brand statement */}
-      <div className="border-b border-white/10">
+      <div className="relative border-b border-white/[0.06]">
         <div className="container-luxury py-24 md:py-36 text-center">
-          <p className="text-micro text-white/40 mb-12">UCLOTHIA / India</p>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light leading-[1.0] tracking-[-0.02em] text-white break-words">
+          {/* Gold accent eyebrow */}
+          <div className="flex items-center justify-center gap-4 mb-10">
+            <span className="h-px w-8 bg-[var(--color-accent)]/40" />
+            <p className="text-[0.625rem] uppercase tracking-[0.35em] font-medium text-[var(--color-accent)]/60">
+              UCLOTHIA / India
+            </p>
+            <span className="h-px w-8 bg-[var(--color-accent)]/40" />
+          </div>
+
+          <h2 className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-light leading-[0.95] tracking-[-0.03em] text-white break-words">
             UCLOTHIA
           </h2>
-          <p className="font-display text-xl md:text-2xl font-light italic leading-[1.4] max-w-xl mx-auto text-white/60 mt-8">
+
+          <p className="font-display text-xl md:text-2xl font-light italic leading-[1.4] max-w-xl mx-auto text-white/40 mt-8">
             Modern Indian elegance,
             <span className="block">rooted in craft.</span>
           </p>
+
+          {/* Decorative diamond ornament */}
+          <div className="flex items-center justify-center gap-3 mt-10">
+            <span className="h-px w-6 bg-white/10" />
+            <span className="w-1.5 h-1.5 rotate-45 border border-[var(--color-accent)]/30" />
+            <span className="h-px w-6 bg-white/10" />
+          </div>
         </div>
       </div>
 
       {/* Newsletter */}
-      <div className="border-b border-white/10">
+      <div className="relative border-b border-white/[0.06]">
         <div className="container-luxury py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center max-w-4xl mx-auto">
             <div>
-              <p className="text-eyebrow text-white/60 mb-4">Join the House</p>
-              <h3 className="font-display text-2xl md:text-3xl font-light leading-tight">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="h-px w-6 bg-[var(--color-accent)]/40" />
+                <p className="text-[0.625rem] uppercase tracking-[0.3em] font-medium text-[var(--color-accent)]/60">
+                  Join the House
+                </p>
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl font-light leading-tight text-white">
                 Receive collection stories
-                <span className="block italic text-white/60">and private invitations.</span>
+                <span className="block italic text-white/40">and private invitations.</span>
               </h3>
             </div>
             <NewsletterForm />
@@ -36,110 +60,74 @@ export function Footer() {
       </div>
 
       {/* Links */}
-      <div className="container-luxury py-20 md:py-24">
+      <div className="relative container-luxury py-20 md:py-24">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-12 md:gap-14">
+          {[
+            { title: "Shop", links: footerNav.shop },
+            { title: "The House", links: footerNav.house },
+            { title: "Service", links: footerNav.service },
+            { title: "Customer Care", links: footerNav.care },
+          ].map((col) => (
+            <div key={col.title}>
+              <h3 className="text-[0.625rem] uppercase tracking-[0.25em] font-medium text-[var(--color-accent)]/50 mb-6">
+                {col.title}
+              </h3>
+              <ul className="space-y-4">
+                {col.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="group inline-flex items-center gap-2 py-1 text-[0.8125rem] text-white/50 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                    >
+                      <span className="h-px w-0 bg-[var(--color-accent)] transition-all duration-300 ease-[var(--ease-out)] group-hover:w-3" />
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* Social column */}
           <div>
-            <h3 className="text-eyebrow text-white/60 mb-6">Shop</h3>
-            <ul className="space-y-5">
-              {footerNav.shop.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
-                  >
-                    {link.label}
-                  </Link>
+            <h3 className="text-[0.625rem] uppercase tracking-[0.25em] font-medium text-[var(--color-accent)]/50 mb-6">
+              Social
+            </h3>
+            <ul className="space-y-4">
+              {[
+                { label: "Instagram", href: "https://instagram.com", external: true },
+                { label: "YouTube", href: "https://youtube.com", external: true },
+                { label: "Contact", href: "mailto:contact@uclothia.com", external: false },
+              ].map((link) => (
+                <li key={link.label}>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2 py-1 text-[0.8125rem] text-white/50 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                    >
+                      <span className="h-px w-0 bg-[var(--color-accent)] transition-all duration-300 ease-[var(--ease-out)] group-hover:w-3" />
+                      {link.label}
+                    </a>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="group inline-flex items-center gap-2 py-1 text-[0.8125rem] text-white/50 hover:text-white transition-colors duration-[var(--duration-fast)]"
+                    >
+                      <span className="h-px w-0 bg-[var(--color-accent)] transition-all duration-300 ease-[var(--ease-out)] group-hover:w-3" />
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-eyebrow text-white/60 mb-6">The House</h3>
-            <ul className="space-y-5">
-              {footerNav.house.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-eyebrow text-white/60 mb-6">Service</h3>
-            <ul className="space-y-5">
-              {footerNav.service.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-eyebrow text-white/60 mb-6">Customer Care</h3>
-            <ul className="space-y-5">
-              {footerNav.care.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-eyebrow text-white/60 mb-6">Social</h3>
-            <ul className="space-y-5">
-              <li>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
-                >
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://youtube.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
-                >
-                  YouTube
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:contact@uclothia.com"
-                  className="inline-block py-1 text-[0.8125rem] text-white/70 hover:text-white transition-colors duration-[var(--duration-fast)]"
-                >
-                  Contact
-                </a>
-              </li>
             </ul>
           </div>
         </div>
       </div>
 
       {/* Trust signals */}
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-white/[0.06]">
         <div className="container-luxury py-10 md:py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {[
@@ -150,19 +138,19 @@ export function Footer() {
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-3 md:gap-4">
                 <svg
-                  width="24"
-                  height="24"
+                  width="22"
+                  height="22"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1"
-                  className="text-[var(--color-accent)] shrink-0"
+                  className="text-[var(--color-accent)]/60 shrink-0"
                 >
                   <path d={item.icon} />
                 </svg>
                 <div>
-                  <p className="text-[0.75rem] font-medium tracking-[0.05em] text-white/90">{item.label}</p>
-                  <p className="text-[0.625rem] tracking-[0.1em] uppercase text-white/40 mt-0.5">{item.sub}</p>
+                  <p className="text-[0.75rem] font-medium tracking-[0.05em] text-white/80">{item.label}</p>
+                  <p className="text-[0.625rem] tracking-[0.1em] uppercase text-white/30 mt-0.5">{item.sub}</p>
                 </div>
               </div>
             ))}
@@ -171,16 +159,24 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      <div className="relative border-t border-white/[0.06]">
         <div className="container-luxury py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="text-[0.75rem] text-white/60 tracking-[0.05em]">
+          <span className="text-[0.75rem] text-white/40 tracking-[0.05em] font-light">
             © {new Date().getFullYear()} UCLOTHIA. All rights reserved.
           </span>
+
+          {/* Decorative center ornament */}
+          <div className="hidden md:flex items-center gap-3">
+            <span className="h-px w-4 bg-white/10" />
+            <span className="w-1 h-1 rotate-45 border border-[var(--color-accent)]/20" />
+            <span className="h-px w-4 bg-white/10" />
+          </div>
+
           <div className="flex items-center gap-4">
-            <span className="text-[0.625rem] uppercase tracking-[0.15em] text-white/30">We Accept</span>
-            <div className="flex items-center gap-3">
+            <span className="text-[0.625rem] uppercase tracking-[0.15em] text-white/25">We Accept</span>
+            <div className="flex items-center gap-2">
               {["VISA", "MC", "AMEX", "UPI"].map((p) => (
-                <span key={p} className="text-[0.625rem] font-medium tracking-[0.1em] text-white/50 border border-white/15 px-2 py-1 rounded">
+                <span key={p} className="text-[0.625rem] font-medium tracking-[0.1em] text-white/40 border border-white/10 px-2 py-1 rounded text-center min-w-[2.5rem]">
                   {p}
                 </span>
               ))}

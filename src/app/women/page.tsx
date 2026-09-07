@@ -205,7 +205,7 @@ export default function WomenPage() {
           </Reveal>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
             {categories.map((cat, i) => (
-              <Reveal key={cat.href} variant="mask-sweep" delay={i * 80}>
+              <Reveal key={cat.href} variant="mask-sweep" delay={i * 80} className="relative">
                 <Link
                   href={cat.href}
                   className="group relative aspect-[3/4] overflow-hidden bg-[var(--color-surface)] rounded-xl md:rounded-2xl block"

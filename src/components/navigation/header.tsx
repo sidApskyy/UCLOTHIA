@@ -70,6 +70,7 @@ export function Header() {
     "/house",
     "/private-client",
     "/weddings",
+    "/search",
   ];
   const hasHero = heroPaths.includes(pathname) ||
     /^\/collections\/[^/]+$/.test(pathname) ||
@@ -79,7 +80,7 @@ export function Header() {
   const isTransparent = hasHero && !isSolid;
 
   const linkColor = isTransparent
-    ? "text-white/80 hover:text-white"
+    ? "text-white hover:text-white/70"
     : "text-[var(--color-text-secondary)] hover:text-[var(--color-text)]";
   const activeLinkColor = isTransparent
     ? "text-white"

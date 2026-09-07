@@ -46,25 +46,38 @@ export default function CheckoutPage() {
     return (
       <div className="pt-8">
         <div className="container-luxury py-32 text-center max-w-md mx-auto">
-          <div className="w-14 h-14 mx-auto mb-8 border border-[var(--color-text)] rounded-full flex items-center justify-center">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <div className="w-14 h-14 mx-auto mb-8 border border-[var(--color-accent)] rounded-full flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
               <path d="M20 6 9 17l-5-5" />
             </svg>
           </div>
-          <p className="text-eyebrow text-[var(--color-accent)] mb-4">Request Received</p>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="h-px w-8 bg-[var(--color-accent)]" />
+            <p className="text-[0.6875rem] uppercase tracking-[0.3em] font-medium text-[var(--color-accent)]">Request Received</p>
+            <span className="h-px w-8 bg-[var(--color-accent)]" />
+          </div>
           <h1 className="font-display text-3xl md:text-4xl font-light mb-4">
-            Thank you for your request
+            Thank you for your <span className="italic text-[var(--color-muted)]">request</span>
           </h1>
-          <p className="text-body mb-2">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="h-px w-6 bg-[var(--color-border-strong)]" />
+            <span className="w-1.5 h-1.5 rotate-45 border border-[var(--color-accent)]/40" />
+            <span className="h-px w-6 bg-[var(--color-border-strong)]" />
+          </div>
+          <p className="text-[0.875rem] text-[var(--color-text-secondary)] mb-2">
             Your request reference is
           </p>
           <p className="font-display text-xl font-medium mb-6 tracking-wide">{orderNumber}</p>
-          <p className="text-body mb-8">
+          <p className="text-[0.875rem] text-[var(--color-text-secondary)] leading-[1.7] mb-10">
             Our team will contact you within 48 hours to confirm details, arrange payment,
             and begin processing your order.
           </p>
-          <Link href="/new" className="btn-primary">
+          <Link
+            href="/new"
+            className="inline-flex items-center gap-3 px-10 py-4 border border-[var(--color-text)] text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-[var(--color-text)] hover:bg-[var(--color-text)] hover:text-[var(--color-background)] transition-all duration-500 group"
+          >
             Continue Shopping
+            <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
           </Link>
         </div>
       </div>
@@ -74,15 +87,29 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="pt-8">
-        <div className="container-luxury py-32 text-center">
+        <div className="container-luxury py-32 text-center max-w-md mx-auto">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="h-px w-8 bg-[var(--color-accent)]" />
+            <p className="text-[0.6875rem] uppercase tracking-[0.3em] font-medium text-[var(--color-accent)]">Empty</p>
+            <span className="h-px w-8 bg-[var(--color-accent)]" />
+          </div>
           <h1 className="font-display text-3xl md:text-4xl font-light mb-4">
-            Your bag is empty
+            Your bag is <span className="italic text-[var(--color-muted)]">empty</span>
           </h1>
-          <p className="text-body text-[var(--color-muted)] mb-6">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="h-px w-6 bg-[var(--color-border-strong)]" />
+            <span className="w-1.5 h-1.5 rotate-45 border border-[var(--color-accent)]/40" />
+            <span className="h-px w-6 bg-[var(--color-border-strong)]" />
+          </div>
+          <p className="text-[0.875rem] text-[var(--color-muted)] mb-10 leading-[1.6]">
             Add pieces to your bag before checking out.
           </p>
-          <Link href="/new" className="btn-primary">
+          <Link
+            href="/new"
+            className="inline-flex items-center gap-3 px-10 py-4 border border-[var(--color-text)] text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-[var(--color-text)] hover:bg-[var(--color-text)] hover:text-[var(--color-background)] transition-all duration-500 group"
+          >
             Explore New Arrivals
+            <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>
           </Link>
         </div>
       </div>
@@ -92,10 +119,24 @@ export default function CheckoutPage() {
   return (
     <div className="pt-24 md:pt-32">
       <div className="container-luxury py-20 md:py-28">
-        <p className="text-eyebrow-accent mb-4">Checkout</p>
-        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-[-0.02em]">
-          Complete Your Order
-        </h1>
+        {/* Luxury header */}
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="h-px w-8 bg-[var(--color-accent)]" />
+            <p className="text-[0.6875rem] uppercase tracking-[0.3em] font-medium text-[var(--color-accent)]">
+              Checkout
+            </p>
+            <span className="h-px w-8 bg-[var(--color-accent)]" />
+          </div>
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-light tracking-[-0.02em] mb-6">
+            Complete Your <span className="italic text-[var(--color-muted)]">Order</span>
+          </h1>
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-px w-6 bg-[var(--color-border-strong)]" />
+            <span className="w-1 h-1 rotate-45 border border-[var(--color-accent)]/30" />
+            <span className="h-px w-6 bg-[var(--color-border-strong)]" />
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 lg:gap-16">
           {/* Form */}
@@ -234,16 +275,39 @@ export default function CheckoutPage() {
                 ))}
               </div>
             )}
-            <button type="submit" disabled={isPending} className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed">
+            <button
+              type="submit"
+              disabled={isPending}
+              className="inline-flex items-center justify-center gap-3 w-full px-10 py-4 border border-[var(--color-text)] text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-[var(--color-text)] hover:bg-[var(--color-text)] hover:text-[var(--color-background)] transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               {isPending ? "Submitting…" : "Submit Order Request"}
+              {!isPending && <span className="transition-transform duration-500 group-hover:translate-x-1">→</span>}
             </button>
+            {/* Trust badges */}
+            <div className="flex flex-wrap items-center justify-center gap-y-3 gap-x-6 mt-8 pt-8 border-t border-[var(--color-border)]">
+              <span className="flex items-center gap-2 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--color-muted)] font-medium">
+                <span className="w-1 h-1 rounded-full bg-[var(--color-accent)]/50" />
+                Secure Checkout
+              </span>
+              <span className="flex items-center gap-2 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--color-muted)] font-medium">
+                <span className="w-1 h-1 rounded-full bg-[var(--color-accent)]/50" />
+                48-Hour Response
+              </span>
+              <span className="flex items-center gap-2 text-[0.625rem] uppercase tracking-[0.2em] text-[var(--color-muted)] font-medium">
+                <span className="w-1 h-1 rounded-full bg-[var(--color-accent)]/50" />
+                White-Glove Service
+              </span>
+            </div>
           </form>
 
           {/* Summary */}
-          <aside className="lg:sticky lg:top-28 h-fit bg-[var(--color-surface-alt)] p-10">
-            <h2 className="text-[0.8125rem] font-medium tracking-[0.15em] uppercase mb-8">
-              Order Summary
-            </h2>
+          <aside className="lg:sticky lg:top-28 h-fit bg-[var(--color-surface-alt)] p-10 rounded-2xl border border-[var(--color-border)]">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="h-px w-6 bg-[var(--color-accent)]" />
+              <h2 className="text-[0.6875rem] font-medium tracking-[0.25em] uppercase text-[var(--color-accent)]">
+                Order Summary
+              </h2>
+            </div>
             <ul className="space-y-6 mb-8">
               {items.map((item) => (
                 <li key={`${item.productId}-${item.size}-${item.color}`} className="flex gap-3">

@@ -33,13 +33,13 @@ export function CartToast() {
         role="status"
       >
         <div className="bg-[var(--color-text)] text-[var(--color-background)] px-6 py-4 flex items-center gap-4 shadow-lg">
-          <div className="w-6 h-6 rounded-full border border-white/40 flex items-center justify-center flex-shrink-0">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="w-6 h-6 rounded-full border border-[var(--color-accent)]/50 flex items-center justify-center flex-shrink-0">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--color-accent)]">
               <path d="M20 6 9 17l-5-5" />
             </svg>
           </div>
           <div className="flex flex-col">
-            <span className="text-[0.625rem] tracking-[0.15em] uppercase text-white/60">
+            <span className="text-[0.5625rem] tracking-[0.2em] uppercase text-[var(--color-accent)]/80">
               Added to Bag
             </span>
             <span className="text-[0.8125rem] font-medium leading-snug">
@@ -51,7 +51,7 @@ export function CartToast() {
               setDismissedKey(currentItemKey);
               openCart();
             }}
-            className="text-[0.6875rem] tracking-[0.15em] uppercase text-white/80 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-0.5 ml-2"
+            className="text-[0.625rem] tracking-[0.2em] uppercase text-white/80 hover:text-white transition-colors border-b border-white/30 hover:border-[var(--color-accent)] pb-0.5 ml-2"
           >
             View Bag
           </button>
