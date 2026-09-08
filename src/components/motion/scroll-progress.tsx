@@ -50,7 +50,7 @@ export function ScrollProgress() {
     >
       <div
         ref={barRef}
-        className="h-full w-full bg-gradient-to-r from-[var(--color-accent)] via-[#e2c882] to-[var(--color-accent)] origin-left will-change-transform scale-x-0 transition-transform duration-75 ease-out"
+        className="h-full w-full bg-gradient-to-r from-[var(--color-accent)] via-[#e2c882] to-[var(--color-accent)] origin-left will-change-transform scale-x-0"
       />
     </div>
   );

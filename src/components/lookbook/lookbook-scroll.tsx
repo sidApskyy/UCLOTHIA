@@ -206,16 +206,27 @@ export function LookbookScroll({ looks }: LookbookScrollProps) {
       }
     });
 
-    setActiveIndex(nearestReal);
+    setActiveIndex((prev) => (prev === nearestReal ? prev : nearestReal));
   }, []);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    const onScroll = () => applyVisuals();
+    let rafId: number | null = null;
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          applyVisuals();
+          rafId = null;
+        });
+      }
+    };
     container.addEventListener("scroll", onScroll, { passive: true });
     applyVisuals();
-    return () => container.removeEventListener("scroll", onScroll);
+    return () => {
+      container.removeEventListener("scroll", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, [applyVisuals]);
 
   // Cross-fade background gradient when active look changes

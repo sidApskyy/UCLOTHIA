@@ -127,6 +127,20 @@ export function SpecularButton({
     if (!btn || !fx) return;
 
     const dpr = window.devicePixelRatio || 1;
+
+    // Probe WebGL support BEFORE constructing ogl's Renderer — it logs
+    // console.error('unable to create webgl context') instead of throwing,
+    // which surfaces as an error in the Next.js dev overlay.
+    const probe = document.createElement("canvas");
+    const webglSupported = !!(
+      probe.getContext("webgl2") || probe.getContext("webgl")
+    );
+    if (!webglSupported) {
+      // Fall back to a static CSS border so the button still renders correctly.
+      btn.classList.add("specular-button--no-webgl");
+      return;
+    }
+
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
@@ -134,6 +148,10 @@ export function SpecularButton({
       dpr,
     } as any);
     const gl = renderer.gl;
+    if (!gl) {
+      btn.classList.add("specular-button--no-webgl");
+      return;
+    }
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);

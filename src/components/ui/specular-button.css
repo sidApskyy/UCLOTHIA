@@ -79,3 +79,12 @@
   position: relative;
   z-index: 2;
 }
+
+/* Fallback when WebGL is unavailable: static border replaces the shader rim */
+.specular-button--no-webgl {
+  border: 1px solid color-mix(in srgb, var(--sb-text-color) 35%, transparent);
+}
+
+.specular-button--no-webgl .specular-button__fx {
+  display: none;
+}

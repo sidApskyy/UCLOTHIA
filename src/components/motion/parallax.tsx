@@ -65,7 +65,7 @@ export function Parallax({
     <Tag ref={containerRef as never} className={`relative overflow-hidden ${className}`}>
       <div
         ref={innerRef}
-        className="relative w-full h-full will-change-transform transition-transform duration-75 ease-out"
+        className="relative w-full h-full will-change-transform"
       >
         {children}
       </div>
